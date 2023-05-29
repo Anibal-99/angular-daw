@@ -1,22 +1,20 @@
 FROM node:18.16.0-alpine3.16
 
-RUN adduser -D user
-
 EXPOSE 4200
 
-RUN mkdir /app && chown user /app
-RUN mkdir /app/node_modules && chown user /app/node_modules
+RUN mkdir /app && chown node /app
+RUN mkdir /app/node_modules && chown node /app/node_modules
 
 WORKDIR /app
 
-COPY --chown=user package.json .
-COPY --chown=user yarn.lock .
+USER node
 
-USER user
+COPY --chown=node package.json .
+COPY --chown=node yarn.lock .
 
 RUN yarn global add @angular/cli
 RUN yarn
 
-COPY --chown=user . .
+COPY --chown=node . .
 
 CMD ["yarn", "serve", "--host", "0.0.0.0", "--disable-host-check"]
