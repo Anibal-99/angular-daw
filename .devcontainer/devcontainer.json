@@ -1,0 +1,10 @@
+{
+	"name": "angular-daw-dc",
+	"build": {
+		"context": "..",
+		"dockerfile": "../Dockerfile"
+	},
+	"shutdownAction": "stopCompose",
+	"workspaceMount": "source=node_modules,target=/app/node_modules,type=volume",
+	"workspaceFolder": "/app"
+}
