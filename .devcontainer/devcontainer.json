@@ -4,7 +4,7 @@
 		"context": "..",
 		"dockerfile": "../Dockerfile"
 	},
-	"shutdownAction": "stopCompose",
 	"workspaceMount": "source=node_modules,target=/app/node_modules,type=volume",
-	"workspaceFolder": "/app"
+	"workspaceFolder": "/app",
+        "mounts": ["source=/home/samuca/facu/angular-daw,target=/app,type=bind"]
 }
