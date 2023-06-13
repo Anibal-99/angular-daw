@@ -1,0 +1,10 @@
+{
+	"name": "angular-daw-dc",
+	"build": {
+		"context": "..",
+		"dockerfile": "../Dockerfile"
+	},
+	"workspaceMount": "source=node_modules,target=/app/node_modules,type=volume",
+	"workspaceFolder": "/app",
+        "mounts": ["source=/home/samuca/facu/angular-daw,target=/app,type=bind"]
+}
