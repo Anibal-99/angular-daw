@@ -6,19 +6,30 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientRegistrationComponent } from './client-registration/client-registration.component';
-import { ClientListComponent } from './client-list/client-list.component';
-import { ClientDetailComponent } from './client-detail/client-detail.component'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import {MatIconModule} from '@angular/material/icon'
-import {MatButtonModule} from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
+import { BaseTableComponent } from './common/base-table/base-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { ReservationTableAdapterComponent } from './reservation/adapters/reservation-table-adapter.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './api.service';
+import { ReservationContainerComponent } from './reservation/components/reservation-container.component';
+import { HeaderComponent } from './sections/header/header.component';
+import { MainComponent } from './sections/main/main.component';
+import { FooterComponent } from './sections/footer/footer.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientRegistrationComponent,
-    ClientListComponent,
-    ClientDetailComponent
+    BaseTableComponent,
+    ReservationTableAdapterComponent,
+    ReservationContainerComponent,
+    HeaderComponent,
+    MainComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,8 +40,10 @@ import {MatButtonModule} from '@angular/material/button'
     NgbModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
