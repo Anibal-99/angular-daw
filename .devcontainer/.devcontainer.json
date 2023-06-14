@@ -1,0 +1,11 @@
+{
+    "name": "angular-daw-dc",
+    "build":{
+        "context": "..",
+        "dockerfile": "../Dockerfile"
+    },
+
+    "workspaceMount": "source=angular-daw_node_modules,target=/app/node_modules,type=volume",
+    "workspaceFolder": "/app",
+    "mounts": ["source=/home/anib4l-99/workspace/facultad/daw/angular-daw,target=/app,type=bind"]
+}
