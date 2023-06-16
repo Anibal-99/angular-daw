@@ -18,6 +18,8 @@ import { ReservationContainerComponent } from './reservation/components/reservat
 import { HeaderComponent } from './sections/header/header.component';
 import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
+import { ClienteTableAdapterComponent } from './client/adapters/client-table-adapter.component';
+import { ClienteContainerComponent } from './client/components/client-container.component';
 
 
 
@@ -27,6 +29,8 @@ import { FooterComponent } from './sections/footer/footer.component';
     BaseTableComponent,
     ReservationTableAdapterComponent,
     ReservationContainerComponent,
+    ClienteTableAdapterComponent,
+    ClienteContainerComponent,
     HeaderComponent,
     MainComponent,
     FooterComponent,

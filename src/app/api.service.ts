@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RawReservation} from './reservation/models/reservation.model';
+import { RawCliente } from './client/models/client.model';
 
 @Injectable()
 export class ApiService {
@@ -8,8 +9,11 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-
     getReservations() {
         return this.http.get<RawReservation[]>(`${this.apiBaseUrl}/reservations/`)
+    }
+
+    getClientes() {
+        return this.http.get<RawCliente[]>(`${this.apiBaseUrl}/clients/`)
     }
 }
