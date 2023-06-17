@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RawReservation} from './reservation/models/reservation.model';
+import { RawReservation } from './reservation/models/reservation.model';
 import { RawCliente } from './client/models/client.model';
+import { RawPlace } from './place/models/place.model';
+import { RawResource } from './resources/models/resource.model';
+
 
 @Injectable()
 export class ApiService {
@@ -15,5 +18,13 @@ export class ApiService {
 
     getClientes() {
         return this.http.get<RawCliente[]>(`${this.apiBaseUrl}/clients/`)
+    }
+
+    getPlaces() {
+        return this.http.get<RawPlace[]>(`${this.apiBaseUrl}/places/`)
+    }
+
+    getResources() {
+        return this.http.get<RawResource[]>(`${this.apiBaseUrl}/resources/`)
     }
 }

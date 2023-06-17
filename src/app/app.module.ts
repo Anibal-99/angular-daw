@@ -21,6 +21,11 @@ import { FooterComponent } from './sections/footer/footer.component';
 import { ClienteTableAdapterComponent } from './client/adapters/client-table-adapter.component';
 import { ClienteContainerComponent } from './client/components/client-container.component';
 
+import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
+import { PlaceContainerComponent } from './place/components/place-container.component';
+import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
+import { ResourceContainerComponent } from './resources/components/resource-container.component';
+
 
 
 @NgModule({
@@ -31,6 +36,10 @@ import { ClienteContainerComponent } from './client/components/client-container.
     ReservationContainerComponent,
     ClienteTableAdapterComponent,
     ClienteContainerComponent,
+    PlaceTableAdapterComponent,
+    PlaceContainerComponent,
+    ResourceTableAdapterComponent,
+    ResourceContainerComponent,
     HeaderComponent,
     MainComponent,
     FooterComponent,
