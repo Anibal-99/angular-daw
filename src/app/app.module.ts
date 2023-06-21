@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,8 +17,7 @@ import { ReservationContainerComponent } from './reservation/components/reservat
 import { HeaderComponent } from './sections/header/header.component';
 import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,6 +40,7 @@ import { FooterComponent } from './sections/footer/footer.component';
     MatButtonModule,
     MatTableModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
