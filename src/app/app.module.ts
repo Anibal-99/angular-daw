@@ -18,6 +18,13 @@ import { HeaderComponent } from './sections/header/header.component';
 import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponentReservation } from './reservation/dialog-reservation/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core'
+
 
 @NgModule({
   declarations: [
@@ -28,6 +35,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     HeaderComponent,
     MainComponent,
     FooterComponent,
+    DialogComponentReservation,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     HttpClientModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Agregar una nueva reserva</h1>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Titulo de reserva</mat-label>
+        <input matInput placeholder="Titulo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Razon por el cual realiza la reserva</mat-label>
+        <textarea matInput placeholder="Razon"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Fecha Reserva</mat-label>
+        <input matInput [matDatepicker]="myDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select placeholder="Estado">
+            <mat-option value="">Aceptada</mat-option> 
+            <mat-option value="">En espera</mat-option> 
+            <mat-option value="">Terminada</mat-option> 
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Monto total</mat-label>
+        <input matInput type="number" placeholder="Monto" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Cliente</mat-label>
+        <mat-select placeholder="Cliente">
+            <mat-option value="">Samuca puto</mat-option> 
+            <mat-option value="">Winka come hombre</mat-option> 
+            <mat-option value="">Baco frente infinita</mat-option> 
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button style="margin-left: 8px; margin-right: 20px;" mat-raised-button color="primary">Guardar</button>
+</div>
