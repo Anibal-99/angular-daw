@@ -4,7 +4,7 @@
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="primary">
-            <mat-icon>edit</mat-icon>
+            <mat-icon (click)="editReservation(element)">edit</mat-icon>
         </button>
         <button mat-icon-button color="warn">
             <mat-icon>delete</mat-icon>

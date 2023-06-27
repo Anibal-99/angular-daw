@@ -7,9 +7,9 @@ import { DialogComponentReservation } from 'src/app/reservation/dialog-reservati
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent { 
+export class HeaderComponent {
 
-    
+
     constructor(private dialog: MatDialog){
 
     }
@@ -17,7 +17,7 @@ export class HeaderComponent {
   openDialog() {
     this.dialog.open(DialogComponentReservation, {
       width:'30%',
-      height:'70%'
+      height:'80%'
     });
   }
 }
