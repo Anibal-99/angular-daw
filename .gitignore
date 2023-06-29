@@ -43,3 +43,4 @@ Thumbs.db
 
 # Dev Container
 .devcontainer/*
+.devcontainer/devcontainer.json
