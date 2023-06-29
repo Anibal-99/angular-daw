@@ -1,13 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { ReservationApiService } from '../../services/reservation-api.service';
 import { DatePipe } from '@angular/common';
 import { StateApiService } from 'src/app/state/services/state-api.service';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, filter, map, of, tap } from 'rxjs';
 import { State } from 'src/app/state/models/state.model';
 import { ClienteApiService } from 'src/app/client/services/client-api.service';
 import { Cliente } from 'src/app/client/models/client.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dialog-reservation',
@@ -16,10 +17,14 @@ import { Cliente } from 'src/app/client/models/client.model';
   providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService]
 })
 
-export class DialogComponentReservation implements OnInit {
+export class DialogComponentReservation implements OnInit, OnDestroy {
   reservationForm!: FormGroup;
   state$: Observable<State[]> = of([]);
   clients$: Observable<Cliente[]> = of([]);
+  subscriptions: Subscription[] = [];
+  SUCCESS_MESSAGE = "Reserva registrada con éxito."
+  FAILURE_MESSAGE = "Hubo un error al registrar la reserva."
+  DISSMISS_MESSAGE = "Ocultar"
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public editReservation : any,
@@ -27,8 +32,14 @@ export class DialogComponentReservation implements OnInit {
     private reservationApiService: ReservationApiService,
     private dialogRef: MatDialogRef<DialogComponentReservation>,
     private stateApiService: StateApiService,
-    private clientService: ClienteApiService
+    private clientService: ClienteApiService,
+    private _snackBar: MatSnackBar,
   ){}
+
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
 
   ngOnInit(): void {
@@ -45,21 +56,24 @@ export class DialogComponentReservation implements OnInit {
   }
 
   addReservation() {
-    console.log(this.reservationForm.value.client)
+    const dtoReservation = {
+      ...this.reservationForm.value,
+      time: this.reservationForm.value.time.toISOString().split('T')[0],
+    }
 
     if (this.reservationForm.valid) {
-      this.reservationApiService.addReservation({
-        ...this.reservationForm.value,
-        time: this.reservationForm.value.time.toISOString().split('T')[0],
-      }).subscribe({
-        next: (res) => {
-          alert("Reserva guardada con éxito");
-        },
-        error: (res) => {
-          alert("Error, no se ha podido guardar la reserva. Por favor, vuelva a intentarlo");
-        }
-      });
+      this.subscriptions.push(
+        this.reservationApiService.addReservation(dtoReservation).subscribe({
+          next: (res) => {
+            this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
+            this.dialogRef.close();
+          },
+          error: (res) => {
+            this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
+            this.dialogRef.close();
+          }
+        })
+      )
     }
   }
-
 }

@@ -32,7 +32,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/table-container/reservation-container.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -70,6 +70,7 @@ import { ReservationContainerComponent } from './reservation/components/table-co
     MatNativeDateModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],
