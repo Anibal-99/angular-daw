@@ -23,4 +23,8 @@ export class ReservationApiService {
     getReservations(): Observable<Reserva[]> {
         return this.apiService.getReservations().pipe(map(this.adaptReservation));
     };
+
+    addReservation(reservation: RawReservation): Observable<any>{
+        return this.apiService.addReservation(reservation);
+    };
 }

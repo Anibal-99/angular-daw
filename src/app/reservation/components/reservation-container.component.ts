@@ -17,5 +17,4 @@ export class ReservationContainerComponent implements OnInit {
     ngOnInit(): void {
         this.reservas$ = this.reservationApiService.getReservations();
     }
-
 }
