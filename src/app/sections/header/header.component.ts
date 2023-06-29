@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponentReservation } from 'src/app/reservation/dialog-reservation/dialog.component';
+import { DialogComponentReservation } from 'src/app/reservation/components/post-dialog/dialog.component';
 
 @Component({
     selector: 'app-header',

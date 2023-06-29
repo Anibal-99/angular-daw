@@ -13,7 +13,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ReservationTableAdapterComponent } from './reservation/adapters/reservation-table-adapter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
-import { ReservationContainerComponent } from './reservation/components/reservation-container.component';
 import { HeaderComponent } from './sections/header/header.component';
 import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
@@ -24,7 +23,7 @@ import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter
 import { PlaceContainerComponent } from './place/components/place-container.component';
 import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
 import { ResourceContainerComponent } from './resources/components/resource-container.component';
-import { DialogComponentReservation } from './reservation/dialog-reservation/dialog.component';
+import { DialogComponentReservation } from './reservation/components/post-dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -32,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReservationContainerComponent } from './reservation/components/table-container/reservation-container.component';
 
 
 @NgModule({
