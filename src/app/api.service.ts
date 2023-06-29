@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RawReservation } from './reservation/models/reservation.model';
+import { RawReservation } from './reservation/reservation.model';
 import { RawCliente } from './client/models/client.model';
 import { RawPlace } from './place/models/place.model';
 import { RawResource } from './resources/models/resource.model';
@@ -35,5 +35,5 @@ export class ApiService {
   getStates() {
     return this.http.get<RawState[]>(`${this.apiBaseUrl}/states/`);
   }
-  
+
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Reserva } from '../../models/reservation.model';
+import { Reserva } from '../reservation.model';
 import { Observable, of } from 'rxjs';
-import { ReservationApiService } from '../../services/reservation-api.service';
+import { ReservationApiService } from '../reservation.service';
 
 
+/**
+ * Container for the table list of reservations
+ */
 @Component({
     selector: 'app-reservation',
     template: `

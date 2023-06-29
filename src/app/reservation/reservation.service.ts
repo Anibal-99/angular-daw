@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { RawReservation } from '../models/reservation.model';
-import { Reserva } from '../models/reservation.model';
-import { ApiService } from '../../api.service';
+import { RawReservation } from './reservation.model';
+import { Reserva } from './reservation.model';
+import { ApiService } from '../api.service';
 
+/**
+ * Injectable service for communicatig with reservation+
+ * related methods on the base api service.
+ */
 @Injectable()
 export class ReservationApiService {
     constructor(private apiService: ApiService){}

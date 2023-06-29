@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { ReservationApiService } from '../../services/reservation-api.service';
+import { ReservationApiService } from '../../reservation.service';
 import { DatePipe } from '@angular/common';
 import { StateApiService } from 'src/app/state/services/state-api.service';
 import { Observable, Subscription, filter, map, of, tap } from 'rxjs';
@@ -10,10 +10,13 @@ import { ClienteApiService } from 'src/app/client/services/client-api.service';
 import { Cliente } from 'src/app/client/models/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/**
+ * Dialog for adding new reservations
+*/
 @Component({
   selector: 'app-dialog-reservation',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.sass'],
+  templateUrl: './reservation-dialog.component.html',
+  styleUrls: ['./reservation-dialog.component.sass'],
   providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService]
 })
 

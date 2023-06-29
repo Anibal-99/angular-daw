@@ -1,3 +1,7 @@
+/**
+ * Interface DTO for request and response object
+ * of the reservation resource
+ */
 export interface RawReservation {
     id: number;
     title: string;
@@ -8,6 +12,10 @@ export interface RawReservation {
     state?: any;
 }
 
+
+/**
+ * Interface Domain for reservation
+ */
 export interface Reserva {
     id: number;
     titulo: string;
@@ -16,6 +24,9 @@ export interface Reserva {
     fecha: string;
 }
 
+/**
+ * Empty object for initializing reservations
+ */
 export const emptyReserva: Reserva = {
     id: 0,
     titulo: '',
