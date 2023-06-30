@@ -10,14 +10,18 @@ import { DialogComponentReservation } from 'src/app/reservation/components/reser
 export class BaseTableComponent{
     @Input() displayedColumns: string[] = [];
     @Input() dataSource: any = [];
+    @Input() dialogComponent: any;
 
     constructor(private dialog: MatDialog){}
 
-    editReservation(element: any){
-      this.dialog.open(DialogComponentReservation, {
+    onEdit(element: any){
+      // TODO: implementar
+      this.dialog.open(this.dialogComponent, { data: element })
+    }
+
+    onAdd() {
+      this.dialog.open(this.dialogComponent, {
         width:'30%',
-        height:'80%',
-        data: element
-      })
+      });
     }
 }

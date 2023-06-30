@@ -12,10 +12,12 @@ import { Observable, of } from 'rxjs';
         <app-base-table
             [dataSource]="reservas$ | async"
             [displayedColumns]="displayedColumns"
+            [dialogComponent]="dialog"
         ></app-base-table>`,
 })
 export class ReservationTableAdapterComponent {
     @Input() reservas$: Observable<Reserva[]> = of([]);
+    @Input() dialog: any;
 
     displayedColumns: string[] = Object.keys(emptyReserva);
 }
