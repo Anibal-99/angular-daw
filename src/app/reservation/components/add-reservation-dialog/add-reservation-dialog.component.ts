@@ -47,12 +47,12 @@ export class AddDialogComponentReservation implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
-      title: [this.editReservation.titulo ?? "", Validators.required],
-      reason: [this.editReservation.razon ?? "", Validators.required],
-      date: [new Date(this.editReservation.fecha) ?? "", Validators.required],
-      ammount: [this.editReservation.monto ?? "", Validators.required],
-      state: [this.editReservation.estado ?? "", Validators.required],
-      client: [this.editReservation.cliente ?? "", Validators.required],
+      title: [this.editReservation?.titulo ?? "", Validators.required],
+      reason: [this.editReservation?.razon ?? "", Validators.required],
+      date: [new Date(this.editReservation?.fecha) ?? "", Validators.required],
+      ammount: [this.editReservation?.monto ?? "", Validators.required],
+      state: [this.editReservation?.estado ?? "", Validators.required],
+      client: [this.editReservation?.cliente ?? "", Validators.required],
     })
     this.state$ = this.stateApiService.getState();
     this.clients$ = this.clientService.getClientes();

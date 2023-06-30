@@ -36,4 +36,8 @@ export class ApiService {
     return this.http.get<RawState[]>(`${this.apiBaseUrl}/states/`);
   }
 
+  destroyReservation(id: number) {
+    return this.http.delete(`${this.apiBaseUrl}/reservations/${id}`)
+  }
+
 }

@@ -31,4 +31,8 @@ export class ReservationApiService {
     addReservation(reservation: RawReservation): Observable<any>{
         return this.apiService.addReservation(reservation);
     };
+
+    destroyReservation(id: number) {
+        return this.apiService.destroyReservation(id);
+    }
 }

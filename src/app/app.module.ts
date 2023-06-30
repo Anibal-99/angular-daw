@@ -23,7 +23,8 @@ import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter
 import { PlaceContainerComponent } from './place/components/place-container.component';
 import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
 import { ResourceContainerComponent } from './resources/components/resource-container.component';
-import { DialogComponentReservation } from './reservation/components/reservation-dialog/reservation-dialog.component';
+import { AddDialogComponentReservation } from './reservation/components/add-reservation-dialog/add-reservation-dialog.component';
+import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -49,7 +50,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    DialogComponentReservation,
+    AddDialogComponentReservation,
+    DestroyDialogComponentReservation,
   ],
   imports: [
     BrowserModule,
