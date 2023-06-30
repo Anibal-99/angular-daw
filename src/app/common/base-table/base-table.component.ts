@@ -18,7 +18,8 @@ export class BaseTableComponent{
 
   onEdit(element: any){
     // TODO: implementar
-    this.dialog.open(this.addDialog, {
+    // this.addDialog.actionBtn= "Actualizar";
+    this.dialog.open(this.addDialog,  {
       width:'30%', data: element
     }).afterClosed().subscribe(() => this.refresh.emit(true));
   }
@@ -34,5 +35,12 @@ export class BaseTableComponent{
       data: element.id
     }).afterClosed().subscribe(() => this.refresh.emit(true));
   };
+  
+  getColumnValue(col: any, element: any): string {
+    if (col ==='cliente') {
+      return ''
+    } else {
+      return element[col] || '';
+    }
+  }
 }
-

@@ -59,24 +59,33 @@ export class AddDialogComponentReservation implements OnInit, OnDestroy {
   }
 
   addReservation() {
-    const dtoReservation = {
-      ...this.reservationForm.value,
+    if(!this.editReservation){
+      const dtoReservation = {...this.reservationForm.value,
+        date: this.reservationForm.value.date.toISOString().split('T')[0],
+      }
+
+      if (this.reservationForm.valid) {
+        this.subscriptions.push(
+          this.reservationApiService.addReservation(dtoReservation).subscribe({
+            next: (res) => {
+              this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            },
+            error: (res) => {
+              this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            }
+          })
+        )
+      }
+    }else{
+      this.updateReservation()
+    }
+  }
+  updateReservation(){
+    const dtoReservation = {...this.reservationForm.value,
       date: this.reservationForm.value.date.toISOString().split('T')[0],
     }
-
-    if (this.reservationForm.valid) {
-      this.subscriptions.push(
-        this.reservationApiService.addReservation(dtoReservation).subscribe({
-          next: (res) => {
-            this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
-            this.dialogRef.close();
-          },
-          error: (res) => {
-            this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
-            this.dialogRef.close();
-          }
-        })
-      )
-    }
+    this.reservationApiService.updateReservation(this.editReservation.id, dtoReservation)
   }
 }

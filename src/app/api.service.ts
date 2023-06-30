@@ -40,4 +40,7 @@ export class ApiService {
     return this.http.delete(`${this.apiBaseUrl}/reservations/${id}`)
   }
 
+  updateReservation(id: number, data: any){
+    return this.http.put(`${this.apiBaseUrl}/reservations/${id}`, data)
+  }
 }

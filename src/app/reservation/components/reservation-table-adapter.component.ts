@@ -27,5 +27,5 @@ export class ReservationTableAdapterComponent {
         this.refresh.emit(event);
     }
 
-    displayedColumns: string[] = Object.keys(emptyReserva);
+    displayedColumns: any[] = Object.keys(emptyReserva);
 }

@@ -35,4 +35,8 @@ export class ReservationApiService {
     destroyReservation(id: number) {
         return this.apiService.destroyReservation(id);
     }
+
+    updateReservation(id: number, data: any){
+        return this.apiService.updateReservation(id, data);
+    }
 }

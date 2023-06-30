@@ -1,3 +1,8 @@
+import { Cliente, RawCliente } from "../client/models/client.model";
+import { RawState, State } from "../state/models/state.model";
+import { emptyCliente } from "../client/models/client.model";
+import { emptyState } from "../state/models/state.model";
+
 /**
  * Interface DTO for request and response object
  * of the reservation resource
@@ -8,10 +13,9 @@ export interface RawReservation {
     date: string;
     ammount: number;
     reason: string;
-    client?: any;
-    state?: any;
+    client: RawCliente;
+    state: RawState;
 }
-
 
 /**
  * Interface Domain for reservation
@@ -22,6 +26,8 @@ export interface Reserva {
     razon: string;
     monto: number;
     fecha: string;
+    cliente: Cliente;
+    estado: State ;
 }
 
 /**
@@ -33,4 +39,6 @@ export const emptyReserva: Reserva = {
     razon: '',
     monto: 0,
     fecha: '',
+    cliente: emptyCliente,
+    estado: emptyState
 }
