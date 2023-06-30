@@ -18,7 +18,9 @@ export class BaseTableComponent{
 
   onEdit(element: any){
     // TODO: implementar
-    this.dialog.open(this.addDialog, { width:'30%', data: element })
+    this.dialog.open(this.addDialog, {
+      width:'30%', data: element
+    }).afterClosed().subscribe(() => this.refresh.emit(true));
   }
 
   onAdd() {
