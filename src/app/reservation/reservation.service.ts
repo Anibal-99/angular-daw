@@ -19,7 +19,7 @@ export class ReservationApiService {
                 titulo: r.title,
                 razon: r.reason,
                 monto: r.ammount,
-                fecha: r.time,
+                fecha: r.date,
             } as Reserva)
         )
     }

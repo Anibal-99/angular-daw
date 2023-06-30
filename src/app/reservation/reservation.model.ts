@@ -5,7 +5,7 @@
 export interface RawReservation {
     id: number;
     title: string;
-    time: string;
+    date: string;
     ammount: number;
     reason: string;
     client?: any;

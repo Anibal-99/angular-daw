@@ -49,7 +49,7 @@ export class DialogComponentReservation implements OnInit, OnDestroy {
     this.reservationForm = this.formBuilder.group({
       title: ["", Validators.required],
       reason: ["", Validators.required],
-      time: ["", Validators.required],
+      date: ["", Validators.required],
       ammount: ["", Validators.required],
       state: ["", Validators.required],
       client: ["", Validators.required],
@@ -61,7 +61,7 @@ export class DialogComponentReservation implements OnInit, OnDestroy {
   addReservation() {
     const dtoReservation = {
       ...this.reservationForm.value,
-      time: this.reservationForm.value.time.toISOString().split('T')[0],
+      date: this.reservationForm.value.date.toISOString().split('T')[0],
     }
 
     if (this.reservationForm.valid) {
