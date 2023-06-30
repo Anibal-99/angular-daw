@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Agregar una nueva reserva</h1>
+
+<div mat-dialog-content [formGroup]="reservationForm" class="mdcontent">
+    <mat-form-field appearance="outline" class="mff-1">
+        <mat-label>Titulo de reserva</mat-label>
+        <input formControlName="title" matInput placeholder="Titulo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Razon por el cual realiza la reserva</mat-label>
+        <textarea formControlName="reason" matInput placeholder="Razon"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Fecha Reserva</mat-label>
+        <input formControlName="date" matInput [matDatepicker]="myDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="state" placeholder="Estado">
+            <mat-option *ngFor="let state of state$ | async" [value]="{id: state.id}">{{state.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Monto total</mat-label>
+        <input formControlName="ammount" matInput type="number" placeholder="Monto" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="client" placeholder="Cliente">
+            <mat-option *ngFor="let client of clients$ | async" [value]="{id: client.id}">{{client.nombre}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center" class="actions">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="addReservation()">Guardar</button>
+</div>
