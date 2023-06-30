@@ -16,6 +16,7 @@ import { DestroyDialogComponentReservation } from './destroy-reservation-dialog/
             [reservas$]="reservas$"
             [addDialog]="addDialog"
             [destroyDialog]="destroyDialog"
+            (refresh)="getData()"
         ></app-reservation-table-adapter>`,
     providers: [ReservationApiService]
 })
@@ -27,6 +28,10 @@ export class ReservationContainerComponent implements OnInit {
     destroyDialog = DestroyDialogComponentReservation;
 
     ngOnInit(): void {
+        this.getData();
+    }
+
+    getData(): void {
         this.reservas$ = this.reservationApiService.getReservations();
     }
 }

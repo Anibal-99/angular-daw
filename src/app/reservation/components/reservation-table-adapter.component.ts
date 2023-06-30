@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Reserva, emptyReserva } from '../reservation.model';
 import { Observable, of } from 'rxjs';
 
@@ -14,12 +14,18 @@ import { Observable, of } from 'rxjs';
             [displayedColumns]="displayedColumns"
             [addDialog]="addDialog"
             [destroyDialog]="destroyDialog"
+            (refresh)="emitRefresh($event)"
         ></app-base-table>`,
 })
 export class ReservationTableAdapterComponent {
     @Input() reservas$: Observable<Reserva[]> = of([]);
     @Input() addDialog: any;
     @Input() destroyDialog: any;
+    @Output() refresh: EventEmitter<boolean> = new EventEmitter();
+
+    emitRefresh(event: boolean) {
+        this.refresh.emit(event);
+    }
 
     displayedColumns: string[] = Object.keys(emptyReserva);
 }
