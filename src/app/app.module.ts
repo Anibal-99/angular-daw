@@ -34,6 +34,7 @@ import {MatNativeDateModule} from '@angular/material/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TypeofPipe } from './common/pipes/typeofPipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FooterComponent,
     AddDialogComponentReservation,
     DestroyDialogComponentReservation,
+    TypeofPipe,
   ],
   imports: [
     BrowserModule,
