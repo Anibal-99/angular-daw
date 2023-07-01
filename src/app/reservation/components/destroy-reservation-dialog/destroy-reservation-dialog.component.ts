@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class DestroyDialogComponentReservation implements OnInit, OnDestroy {
     subscriptions: Subscription[] = [];
-    SUCCESS_MESSAGE = "Reserva eliminada con éxito."
+    SUCCESS_MESSAGE = "Reservation eliminada con éxito."
     FAILURE_MESSAGE = "Hubo un error al eliminar la reserva."
     DISSMISS_MESSAGE = "Ocultar"
 

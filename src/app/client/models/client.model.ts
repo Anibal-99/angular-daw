@@ -1,18 +1,18 @@
-export interface RawCliente {
+export interface ClientDto {
     id: number;
     name: string;
     surname: string;
     dni: number;
 }
 
-export interface Cliente {
+export interface Client {
     id: number;
     nombre: string;
     apellido: string;
     dni: number;
 }
 
-export const emptyCliente: Cliente = {
+export const emptyCliente: Client = {
     id: 0,
     nombre: '',
     apellido: '',

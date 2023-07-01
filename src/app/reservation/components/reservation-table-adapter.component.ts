@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Reserva, emptyReserva } from '../reservation.model';
+import { Reservation, emptyReserva } from '../reservation.model';
 import { Observable, of } from 'rxjs';
 
 /**
@@ -12,14 +12,14 @@ import { Observable, of } from 'rxjs';
         <app-base-table
             [dataSource]="reservas$ | async"
             [displayedColumns]="displayedColumns"
-            [addDialog]="addDialog"
+            [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
             (refresh)="emitRefresh($event)"
         ></app-base-table>`,
 })
 export class ReservationTableAdapterComponent {
-    @Input() reservas$: Observable<Reserva[]> = of([]);
-    @Input() addDialog: any;
+    @Input() reservas$: Observable<Reservation[]> = of([]);
+    @Input() mutateDialog: any;
     @Input() destroyDialog: any;
     @Output() refresh: EventEmitter<boolean> = new EventEmitter();
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../models/client.model';
+import { Client } from '../models/client.model';
 import { Observable, of } from 'rxjs';
 import { ClienteApiService } from '../services/client-api.service';
 
@@ -11,7 +11,7 @@ import { ClienteApiService } from '../services/client-api.service';
 
 export class ClienteContainerComponent implements OnInit {
     constructor(private clienteApiService: ClienteApiService) {}
-    clientes$: Observable<Cliente[]> = of([]);
+    clientes$: Observable<Client[]> = of([]);
 
     ngOnInit(): void {
         this.clientes$ = this.clienteApiService.getClientes();

@@ -11,21 +11,20 @@ import { TypeofPipe } from '../pipes/typeofPipe';
 export class BaseTableComponent{
   @Input() displayedColumns: string[] = [];
   @Input() dataSource: any = [];
-  @Input() addDialog: any;
+  @Input() mutateDialog: any;
   @Input() destroyDialog: any;
   @Output() refresh = new EventEmitter<boolean>();
 
   constructor(private dialog: MatDialog){}
 
   onEdit(element: any){
-    // TODO: implementar
-    this.dialog.open(this.addDialog, {
+    this.dialog.open(this.mutateDialog, {
       width:'30%', data: element
     }).afterClosed().subscribe(() => this.refresh.emit(true));
   }
 
   onAdd() {
-    this.dialog.open(this.addDialog, {
+    this.dialog.open(this.mutateDialog, {
       width:'30%',
     }).afterClosed().subscribe(() => this.refresh.emit(true));
   }

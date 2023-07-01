@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Reserva } from '../reservation.model';
+import { Reservation } from '../reservation.model';
 import { Observable, of } from 'rxjs';
 import { ReservationApiService } from '../reservation.service';
-import { AddDialogComponentReservation } from './add-reservation-dialog/add-reservation-dialog.component';
 import { DestroyDialogComponentReservation } from './destroy-reservation-dialog/destroy-reservation-dialog.component';
+import { MutateDialogComponentReservation } from './mutate-reservation-dialog/mutate-reservation-dialog.component';
 
 
 /**
@@ -14,7 +14,7 @@ import { DestroyDialogComponentReservation } from './destroy-reservation-dialog/
     template: `
         <app-reservation-table-adapter
             [reservas$]="reservas$"
-            [addDialog]="addDialog"
+            [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
             (refresh)="getData()"
         ></app-reservation-table-adapter>`,
@@ -23,8 +23,8 @@ import { DestroyDialogComponentReservation } from './destroy-reservation-dialog/
 
 export class ReservationContainerComponent implements OnInit {
     constructor(private reservationApiService: ReservationApiService) {}
-    reservas$: Observable<Reserva[]> = of([]);
-    addDialog = AddDialogComponentReservation;
+    reservas$: Observable<Reservation[]> = of([]);
+    mutateDialog = MutateDialogComponentReservation;
     destroyDialog = DestroyDialogComponentReservation;
 
     ngOnInit(): void {

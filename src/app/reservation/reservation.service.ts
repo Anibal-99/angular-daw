@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { RawReservation } from './reservation.model';
-import { Reserva } from './reservation.model';
+import { ReservationDto } from './reservation.model';
+import { Reservation } from './reservation.model';
 import { ApiService } from '../api.service';
-import { Cliente } from '../client/models/client.model';
+import { Client } from '../client/models/client.model';
 import { State } from '../state/models/state.model';
 
 /**
@@ -14,7 +14,7 @@ import { State } from '../state/models/state.model';
 export class ReservationApiService {
     constructor(private apiService: ApiService){}
 
-    adaptReservation(reservations: RawReservation[]): Reserva[] {
+    adaptReservation(reservations: ReservationDto[]): Reservation[] {
         return reservations.map(
             r => ({
                 id: r.id,
@@ -22,21 +22,21 @@ export class ReservationApiService {
                 razon: r.reason,
                 monto: r.ammount,
                 fecha: r.date,
-                cliente: {id: r.client?.id, nombre: r.client?.name} as Cliente,
+                cliente: {id: r.client?.id, nombre: r.client?.name} as Client,
                 estado: {id: r.state?.id, nombre: r.state?.name} as State,
-            } as Reserva)
+            } as Reservation)
         )
     }
 
-    getReservations(): Observable<Reserva[]> {
+    getReservations(): Observable<Reservation[]> {
         return this.apiService.getReservations().pipe(map(this.adaptReservation));
     };
 
-    addReservation(reservation: RawReservation): Observable<any>{
+    addReservation(reservation: ReservationDto): Observable<any>{
         return this.apiService.addReservation(reservation);
     };
 
-    editReservation(id: number, reservation: RawReservation): Observable<any> {
+    editReservation(id: number, reservation: ReservationDto): Observable<any> {
         return this.apiService.editReservation(id, reservation);
     }
 

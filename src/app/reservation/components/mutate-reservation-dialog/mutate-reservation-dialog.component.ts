@@ -7,33 +7,40 @@ import { StateApiService } from 'src/app/state/services/state-api.service';
 import { Observable, Subscription, filter, map, of, tap } from 'rxjs';
 import { State } from 'src/app/state/models/state.model';
 import { ClienteApiService } from 'src/app/client/services/client-api.service';
-import { Cliente } from 'src/app/client/models/client.model';
+import { Client } from 'src/app/client/models/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
+enum MESSAGES {
+  ADD_SUCCESS_MESSAGE = "Reserva registrada con éxito.",
+  ADD_FAILURE_MESSAGE = "Hubo un error al registrar la reserva.",
+  EDIT_SUCCESS_MESSAGE = "Reserva modificada con éxito.",
+  EDIT_FAILURE_MESSAGE = "Hubo un error al registrar la reserva.",
+  DISSMISS_MESSAGE = "Ocultar",
+}
+
+
 /**
- * Dialog for adding new reservations
+ * Dialog for adding new reservations or editing existing ones
 */
 @Component({
-  selector: 'app-add-dialog-reservation',
-  templateUrl: './add-reservation-dialog.component.html',
-  styleUrls: ['./add-reservation-dialog.component.sass'],
+  selector: 'app-mutate-dialog-reservation',
+  templateUrl: './mutate-reservation-dialog.component.html',
+  styleUrls: ['./mutate-reservation-dialog.component.sass'],
   providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService]
 })
 
-export class AddDialogComponentReservation implements OnInit, OnDestroy {
+export class MutateDialogComponentReservation implements OnInit, OnDestroy {
   reservationForm!: FormGroup;
   state$: Observable<State[]> = of([]);
-  clients$: Observable<Cliente[]> = of([]);
+  clients$: Observable<Client[]> = of([]);
   subscriptions: Subscription[] = [];
-  SUCCESS_MESSAGE = "Reserva registrada con éxito."
-  FAILURE_MESSAGE = "Hubo un error al registrar la reserva."
-  DISSMISS_MESSAGE = "Ocultar"
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public editReservation : any,
+    @Inject(MAT_DIALOG_DATA) public existingReservation : any,
     private formBuilder: FormBuilder,
     private reservationApiService: ReservationApiService,
-    private dialogRef: MatDialogRef<AddDialogComponentReservation>,
+    private dialogRef: MatDialogRef<MutateDialogComponentReservation>,
     private stateApiService: StateApiService,
     private clientService: ClienteApiService,
     private _snackBar: MatSnackBar,
@@ -47,12 +54,12 @@ export class AddDialogComponentReservation implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
-      title: [this.editReservation?.titulo ?? "", Validators.required],
-      reason: [this.editReservation?.razon ?? "", Validators.required],
-      date: [new Date(this.editReservation?.fecha) ?? "", Validators.required],
-      ammount: [this.editReservation?.monto ?? "", Validators.required],
-      state: [this.editReservation?.estado.id ?? "", Validators.required],
-      client: [this.editReservation?.cliente.id ?? "", Validators.required],
+      title: [this.existingReservation?.titulo ?? "", Validators.required],
+      reason: [this.existingReservation?.razon ?? "", Validators.required],
+      date: [new Date(this.existingReservation?.fecha) ?? "", Validators.required],
+      ammount: [this.existingReservation?.monto ?? "", Validators.required],
+      state: [this.existingReservation?.estado.id ?? "", Validators.required],
+      client: [this.existingReservation?.cliente.id ?? "", Validators.required],
     })
 
     this.state$ = this.stateApiService.getState();
@@ -71,28 +78,29 @@ export class AddDialogComponentReservation implements OnInit, OnDestroy {
       client: {id: this.reservationForm.value.client},
     }
 
-    if (this.editReservation) {
+    if (this.existingReservation) {
       this.subscriptions.push(
-        this.reservationApiService.editReservation(this.editReservation.id, dtoReservation).subscribe({
-          next: (res) => {
-            this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
-            this.dialogRef.close();
-          },
-          error: (res) => {
-            this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
-            this.dialogRef.close();
-          }
-        })
+        this.reservationApiService.editReservation(this.existingReservation.id, dtoReservation)
+          .subscribe({
+            next: (res) => {
+              this._snackBar.open(MESSAGES.EDIT_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            },
+            error: (res) => {
+              this._snackBar.open(MESSAGES.EDIT_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            }
+          })
       )
     } else {
       this.subscriptions.push(
         this.reservationApiService.addReservation(dtoReservation).subscribe({
           next: (res) => {
-            this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
+            this._snackBar.open(MESSAGES.ADD_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
             this.dialogRef.close();
           },
           error: (res) => {
-            this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
+            this._snackBar.open(MESSAGES.ADD_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
             this.dialogRef.close();
           }
         })

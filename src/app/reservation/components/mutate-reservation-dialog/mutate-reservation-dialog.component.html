@@ -11,7 +11,7 @@
         <textarea formControlName="reason" matInput placeholder="Razon"></textarea>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Fecha Reserva</mat-label>
+        <mat-label>Fecha Reservation</mat-label>
         <input formControlName="date" matInput [matDatepicker]="myDatepicker">
         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #myDatepicker></mat-datepicker>
@@ -35,8 +35,8 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-label>Cliente</mat-label>
-        <mat-select formControlName="client" placeholder="Cliente">
+        <mat-label>Client</mat-label>
+        <mat-select formControlName="client" placeholder="Client">
             <mat-option *ngFor="let client of clients$ | async" [value]="client.id">{{client.nombre}}</mat-option>
         </mat-select>
     </mat-form-field>

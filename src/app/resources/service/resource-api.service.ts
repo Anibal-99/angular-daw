@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { RawResource, Resource } from '../models/resource.model';
+import { ResourceDto, Resource } from '../models/resource.model';
 import { ApiService } from '../../api.service';
 
 @Injectable()
 export class ResourceApiService {
     constructor(private apiService: ApiService){}
 
-    adaptResources(resources: RawResource[]): Resource[] {
+    adaptResources(resources: ResourceDto[]): Resource[] {
         return resources.map(
             resource => ({
                 id: resource.id,

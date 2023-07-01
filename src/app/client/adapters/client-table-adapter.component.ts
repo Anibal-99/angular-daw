@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Cliente, emptyCliente } from '../models/client.model';
+import { Client, emptyCliente } from '../models/client.model';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
   template: `<app-base-table [dataSource]="clientes$ | async" [displayedColumns]="displayedColumns"></app-base-table>`,
 })
 export class ClienteTableAdapterComponent  {
-    @Input() clientes$: Observable<Cliente[]> = of([]);
+    @Input() clientes$: Observable<Client[]> = of([]);
 
     displayedColumns: string[] = Object.keys(emptyCliente);
 

@@ -1,4 +1,4 @@
-export interface RawState {
+export interface StateDto {
     id: number;
     name: string;
     description: string;
