@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subject, of } from 'rxjs';
+import { TypeofPipe } from '../pipes/typeofPipe';
 
 @Component({
   selector: 'app-base-table',
   templateUrl: './base-table.component.html',
-  styleUrls: ['./base-table.component.sass']
+  styleUrls: ['./base-table.component.sass'],
+  providers: [TypeofPipe],
 })
 export class BaseTableComponent{
   @Input() displayedColumns: string[] = [];
