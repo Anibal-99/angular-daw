@@ -32,6 +32,10 @@ export class ApiService {
     return this.http.post<RawReservation>(`${this.apiBaseUrl}/reservations/`, reserva)
   }
 
+  editReservation(id: number, reserva: RawReservation){
+    return this.http.put<RawReservation>(`${this.apiBaseUrl}/reservations/${id}`, reserva)
+  }
+
   getStates() {
     return this.http.get<RawState[]>(`${this.apiBaseUrl}/states/`);
   }

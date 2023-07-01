@@ -11,7 +11,7 @@ export class StateApiService{
         return states.map(
             state => ({
                 id: state.id,
-                name: state.name,
+                nombre: state.name,
                 description: state.description,
             } as State)
         )
