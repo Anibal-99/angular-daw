@@ -51,20 +51,40 @@ export class AddDialogComponentReservation implements OnInit, OnDestroy {
       reason: [this.editReservation?.razon ?? "", Validators.required],
       date: [new Date(this.editReservation?.fecha) ?? "", Validators.required],
       ammount: [this.editReservation?.monto ?? "", Validators.required],
-      state: [this.editReservation?.estado ?? "", Validators.required],
-      client: [this.editReservation?.cliente ?? "", Validators.required],
+      state: [this.editReservation?.estado.id ?? "", Validators.required],
+      client: [this.editReservation?.cliente.id ?? "", Validators.required],
     })
+
     this.state$ = this.stateApiService.getState();
     this.clients$ = this.clientService.getClientes();
   }
 
-  addReservation() {
+  confirm() {
+    if (!this.reservationForm.valid) {
+      return;
+    }
+
     const dtoReservation = {
       ...this.reservationForm.value,
       date: this.reservationForm.value.date.toISOString().split('T')[0],
+      state: {id: this.reservationForm.value.state},
+      client: {id: this.reservationForm.value.client},
     }
 
-    if (this.reservationForm.valid) {
+    if (this.editReservation) {
+      this.subscriptions.push(
+        this.reservationApiService.editReservation(this.editReservation.id, dtoReservation).subscribe({
+          next: (res) => {
+            this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
+            this.dialogRef.close();
+          },
+          error: (res) => {
+            this._snackBar.open(this.FAILURE_MESSAGE, this.DISSMISS_MESSAGE);
+            this.dialogRef.close();
+          }
+        })
+      )
+    } else {
       this.subscriptions.push(
         this.reservationApiService.addReservation(dtoReservation).subscribe({
           next: (res) => {

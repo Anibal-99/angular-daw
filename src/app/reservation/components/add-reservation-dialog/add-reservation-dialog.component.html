@@ -19,8 +19,13 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Estado</mat-label>
-        <mat-select formControlName="state" placeholder="Estado">
-            <mat-option *ngFor="let state of state$ | async" [value]="{id: state.id}">{{state.name}}</mat-option>
+
+        <mat-select formControlName="state" placeholder="Estado" matNativeControl>
+            <mat-option
+                *ngFor="let state of state$ | async"
+                [value]="state.id">
+                {{state.nombre}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -32,12 +37,12 @@
     <mat-form-field appearance="outline">
         <mat-label>Cliente</mat-label>
         <mat-select formControlName="client" placeholder="Cliente">
-            <mat-option *ngFor="let client of clients$ | async" [value]="{id: client.id}">{{client.nombre}}</mat-option>
+            <mat-option *ngFor="let client of clients$ | async" [value]="client.id">{{client.nombre}}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 
 <div mat-dialog-actions align="center" class="actions">
     <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
-    <button mat-raised-button color="primary" (click)="addReservation()">Guardar</button>
+    <button mat-raised-button color="primary" (click)="confirm()">Guardar</button>
 </div>
