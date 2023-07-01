@@ -1,4 +1,4 @@
-export interface RawPlace {
+export interface PlaceDto {
     id: number;
     name: string;
     resource?: any;

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { RawPlace, Place } from '../models/place.model';
+import { PlaceDto, Place } from '../models/place.model';
 import { ApiService } from '../../api.service';
 
 @Injectable()
 export class PlaceApiService {
     constructor(private apiService: ApiService){}
 
-    adaptPlaces(places: RawPlace[]): Place[] {
+    adaptPlaces(places: PlaceDto[]): Place[] {
         return places.map(
             place => ({
                 id: place.id,

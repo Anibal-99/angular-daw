@@ -1,4 +1,4 @@
-export interface RawState {
+export interface StateDto {
     id: number;
     name: string;
     description: string;
@@ -6,10 +6,10 @@ export interface RawState {
 
 export interface State {
     id: number;
-    name: String;
+    nombre: String;
 }
 
 export const emptyState: State = {
     id: 0,
-    name:'',
+    nombre:'',
 }

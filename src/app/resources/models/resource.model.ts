@@ -1,16 +1,15 @@
-export interface RawResource {
+export interface ResourceDto {
     id: number;
     name: string;
     description: string;
     places?: any;
-    // resource?: any;
 }
 
 export interface Resource {
     id: number;
     nombre: string;
     descripcion: string;
-    lugar?: string; 
+    lugar?: string;
 }
 
 export const emptyResource: Resource = {

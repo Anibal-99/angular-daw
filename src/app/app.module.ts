@@ -23,7 +23,6 @@ import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter
 import { PlaceContainerComponent } from './place/components/place-container.component';
 import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
 import { ResourceContainerComponent } from './resources/components/resource-container.component';
-import { AddDialogComponentReservation } from './reservation/components/add-reservation-dialog/add-reservation-dialog.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -34,6 +33,8 @@ import {MatNativeDateModule} from '@angular/material/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TypeofPipe } from './common/pipes/typeofPipe';
+import { MutateDialogComponentReservation } from './reservation/components/mutate-reservation-dialog/mutate-reservation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    AddDialogComponentReservation,
+    MutateDialogComponentReservation,
     DestroyDialogComponentReservation,
+    TypeofPipe,
   ],
   imports: [
     BrowserModule,

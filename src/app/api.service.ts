@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RawReservation } from './reservation/reservation.model';
-import { RawCliente } from './client/models/client.model';
-import { RawPlace } from './place/models/place.model';
-import { RawResource } from './resources/models/resource.model';
-import { RawState } from './state/models/state.model';
+import { ReservationDto } from './reservation/reservation.model';
+import { ClientDto } from './client/models/client.model';
+import { PlaceDto } from './place/models/place.model';
+import { ResourceDto } from './resources/models/resource.model';
+import { StateDto } from './state/models/state.model';
 
 @Injectable()
 export class ApiService {
@@ -12,32 +12,43 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+
+  // reservations
   getReservations() {
-    return this.http.get<RawReservation[]>(`${this.apiBaseUrl}/reservations/`);
+    return this.http.get<ReservationDto[]>(`${this.apiBaseUrl}/reservations/`);
   }
 
-  getClientes() {
-    return this.http.get<RawCliente[]>(`${this.apiBaseUrl}/clients/`);
+  addReservation(reserva: ReservationDto){
+    return this.http.post<ReservationDto>(`${this.apiBaseUrl}/reservations/`, reserva)
   }
 
-  getPlaces() {
-    return this.http.get<RawPlace[]>(`${this.apiBaseUrl}/places/`);
+  editReservation(id: number, reserva: ReservationDto){
+    return this.http.put<ReservationDto>(`${this.apiBaseUrl}/reservations/${id}`, reserva)
   }
 
-  getResources() {
-    return this.http.get<RawResource[]>(`${this.apiBaseUrl}/resources/`);
-  }
-
-  addReservation(reserva: RawReservation){
-    return this.http.post<RawReservation>(`${this.apiBaseUrl}/reservations/`, reserva)
-  }
-
-  getStates() {
-    return this.http.get<RawState[]>(`${this.apiBaseUrl}/states/`);
-  }
 
   destroyReservation(id: number) {
     return this.http.delete(`${this.apiBaseUrl}/reservations/${id}`)
+  }
+
+  // clients
+  getClientes() {
+    return this.http.get<ClientDto[]>(`${this.apiBaseUrl}/clients/`);
+  }
+
+  // places
+  getPlaces() {
+    return this.http.get<PlaceDto[]>(`${this.apiBaseUrl}/places/`);
+  }
+
+  // resources
+  getResources() {
+    return this.http.get<ResourceDto[]>(`${this.apiBaseUrl}/resources/`);
+  }
+
+  // states
+  getStates() {
+    return this.http.get<StateDto[]>(`${this.apiBaseUrl}/states/`);
   }
 
 }
