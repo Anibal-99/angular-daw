@@ -6,8 +6,8 @@ import { DatePipe } from '@angular/common';
 import { StateApiService } from 'src/app/state/services/state-api.service';
 import { Observable, Subscription, filter, map, of, tap } from 'rxjs';
 import { State } from 'src/app/state/models/state.model';
-import { ClienteApiService } from 'src/app/client/services/client-api.service';
-import { Client } from 'src/app/client/models/client.model';
+import { ClienteApiService } from 'src/app/client/client-api.service';
+import { Client } from 'src/app/client/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 

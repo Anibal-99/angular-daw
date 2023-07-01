@@ -1,4 +1,4 @@
-import { Client, ClientDto, emptyCliente } from "../client/models/client.model";
+import { Client, ClientDto, emptyCliente } from "../client/client.model";
 import { StateDto, State, emptyState } from "../state/models/state.model";
 
 /**

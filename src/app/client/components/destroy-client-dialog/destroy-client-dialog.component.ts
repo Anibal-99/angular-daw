@@ -1,32 +1,30 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ReservationApiService } from '../../reservation.service';
 import { DatePipe } from '@angular/common';
-import { StateApiService } from 'src/app/state/services/state-api.service';
 import { Subscription } from 'rxjs';
 import { ClienteApiService } from 'src/app/client/client-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
- * Dialog for destroying new reservations
+ * Dialog for destroying new client
 */
 @Component({
-    selector: 'app-destroy-dialog-reservation',
-    templateUrl: './destroy-reservation-dialog.component.html',
-    styleUrls: ['./destroy-reservation-dialog.component.sass'],
-    providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService]
+    selector: 'app-destroy-dialog-client',
+    templateUrl: './destroy-client-dialog.component.html',
+    styleUrls: ['./destroy-client-dialog.component.sass'],
+    providers: [DatePipe, ClienteApiService]
 })
 
-export class DestroyDialogComponentReservation implements OnInit, OnDestroy {
+export class DestroyDialogComponentClient implements OnInit, OnDestroy {
     subscriptions: Subscription[] = [];
-    SUCCESS_MESSAGE = "Reservation eliminada con éxito."
-    FAILURE_MESSAGE = "Hubo un error al eliminar la reserva."
+    SUCCESS_MESSAGE = "Cliente eliminada con éxito."
+    FAILURE_MESSAGE = "Hubo un error al eliminar cliente."
     DISSMISS_MESSAGE = "Ocultar"
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public id: number,
-        private reservationApiService: ReservationApiService,
-        private dialogRef: MatDialogRef<DestroyDialogComponentReservation>,
+        private clientApiService: ClienteApiService,
+        private dialogRef: MatDialogRef<DestroyDialogComponentClient>,
         private _snackBar: MatSnackBar,
     ) { }
 
@@ -35,12 +33,11 @@ export class DestroyDialogComponentReservation implements OnInit, OnDestroy {
         this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
-
     ngOnInit(): void { }
 
-    destroyReservation() {
+    destroyClient() {
         this.subscriptions.push(
-            this.reservationApiService.destroyReservation(this.id).subscribe({
+            this.clientApiService.destroyClient(this.id).subscribe({
                 next: (res) => {
                     this._snackBar.open(this.SUCCESS_MESSAGE, this.DISSMISS_MESSAGE);
                     this.dialogRef.close();

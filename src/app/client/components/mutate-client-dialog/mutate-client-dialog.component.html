@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Agregar un nuevo cliente</h1>
+
+<div mat-dialog-content [formGroup]="clientForm" class="mdcontent">
+    <mat-form-field appearance="outline" class="mff-1">
+        <mat-label>Nombre del cliente</mat-label>
+        <input formControlName="name" matInput placeholder="Nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Apellido del cliente</mat-label>
+        <textarea formControlName="surname" matInput placeholder="Apellido"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Nro de documento</mat-label>
+        <input formControlName="dni" matInput type="number" placeholder="Nro dni" />
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center" class="actions">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="confirm()">Guardar</button>
+</div>
