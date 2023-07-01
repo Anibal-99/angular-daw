@@ -28,7 +28,6 @@ export class ClienteApiService {
         return this.apiService.editClient(id, client);
     }
     destroyClient(id: number){
-        console.log(id)
         return this.apiService.destroyClient(id);
     }
 
