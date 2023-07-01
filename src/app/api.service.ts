@@ -12,20 +12,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+
+  // reservations
   getReservations() {
     return this.http.get<ReservationDto[]>(`${this.apiBaseUrl}/reservations/`);
-  }
-
-  getClientes() {
-    return this.http.get<ClientDto[]>(`${this.apiBaseUrl}/clients/`);
-  }
-
-  getPlaces() {
-    return this.http.get<PlaceDto[]>(`${this.apiBaseUrl}/places/`);
-  }
-
-  getResources() {
-    return this.http.get<ResourceDto[]>(`${this.apiBaseUrl}/resources/`);
   }
 
   addReservation(reserva: ReservationDto){
@@ -36,12 +26,29 @@ export class ApiService {
     return this.http.put<ReservationDto>(`${this.apiBaseUrl}/reservations/${id}`, reserva)
   }
 
-  getStates() {
-    return this.http.get<StateDto[]>(`${this.apiBaseUrl}/states/`);
-  }
 
   destroyReservation(id: number) {
     return this.http.delete(`${this.apiBaseUrl}/reservations/${id}`)
+  }
+
+  // clients
+  getClientes() {
+    return this.http.get<ClientDto[]>(`${this.apiBaseUrl}/clients/`);
+  }
+
+  // places
+  getPlaces() {
+    return this.http.get<PlaceDto[]>(`${this.apiBaseUrl}/places/`);
+  }
+
+  // resources
+  getResources() {
+    return this.http.get<ResourceDto[]>(`${this.apiBaseUrl}/resources/`);
+  }
+
+  // states
+  getStates() {
+    return this.http.get<StateDto[]>(`${this.apiBaseUrl}/states/`);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Reservation, emptyReserva } from '../reservation.model';
+import { Reservation, emptyReservation } from '../reservation.model';
 import { Observable, of } from 'rxjs';
 
 /**
@@ -27,5 +27,5 @@ export class ReservationTableAdapterComponent {
         this.refresh.emit(event);
     }
 
-    displayedColumns: string[] = Object.keys(emptyReserva);
+    displayedColumns: string[] = Object.keys(emptyReservation);
 }

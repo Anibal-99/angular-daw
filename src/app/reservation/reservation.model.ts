@@ -32,7 +32,7 @@ export interface Reservation {
 /**
  * Empty object for initializing reservations
  */
-export const emptyReserva: Reservation = {
+export const emptyReservation: Reservation = {
     id: 0,
     titulo: '',
     razon: '',
