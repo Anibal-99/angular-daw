@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReservationDto } from './reservation/reservation.model';
-import { ClientDto } from './client/models/client.model';
+import { ClientDto } from './client/client.model';
 import { PlaceDto } from './place/models/place.model';
 import { ResourceDto } from './resources/models/resource.model';
 import { StateDto } from './state/models/state.model';
@@ -34,6 +34,18 @@ export class ApiService {
   // clients
   getClientes() {
     return this.http.get<ClientDto[]>(`${this.apiBaseUrl}/clients/`);
+  }
+
+  addClient(client: ClientDto){
+    return this.http.post<ClientDto>(`${this.apiBaseUrl}/clients/`, client)
+  }
+
+  editClient(id: number, client: ClientDto){
+    return this.http.put<ClientDto>(`${this.apiBaseUrl}/clients/${id}`, client)
+  }
+
+  destroyClient(id: number){
+    return this.http.delete(`${this.apiBaseUrl}/clients/${id}`)
   }
 
   // places

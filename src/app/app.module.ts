@@ -16,9 +16,8 @@ import { ApiService } from './api.service';
 import { HeaderComponent } from './sections/header/header.component';
 import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
-import { ClienteTableAdapterComponent } from './client/adapters/client-table-adapter.component';
-import { ClienteContainerComponent } from './client/components/client-container.component';
-
+import { ClienteTableAdapterComponent } from './client//components/client-table-adapter.component';
+import { ClienteContainerComponent } from './client/components/client-table-container.component';
 import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
 import { PlaceContainerComponent } from './place/components/place-container.component';
 import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
@@ -35,6 +34,8 @@ import { ReservationContainerComponent } from './reservation/components/reservat
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TypeofPipe } from './common/pipes/typeofPipe';
 import { MutateDialogComponentReservation } from './reservation/components/mutate-reservation-dialog/mutate-reservation-dialog.component';
+import { MutateDialogComponentClient } from './client/components/mutate-client-dialog/mutate-client-dialog.component';
+import { DestroyDialogComponentClient } from './client/components/destroy-client-dialog/destroy-client-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { MutateDialogComponentReservation } from './reservation/components/mutat
     MutateDialogComponentReservation,
     DestroyDialogComponentReservation,
     TypeofPipe,
+    MutateDialogComponentClient,
+    DestroyDialogComponentClient,
   ],
   imports: [
     BrowserModule,

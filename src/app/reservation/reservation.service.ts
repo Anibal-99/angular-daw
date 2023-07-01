@@ -3,7 +3,7 @@ import { Observable, map } from 'rxjs';
 import { ReservationDto } from './reservation.model';
 import { Reservation } from './reservation.model';
 import { ApiService } from '../api.service';
-import { Client } from '../client/models/client.model';
+import { Client } from '../client/client.model';
 import { State } from '../state/models/state.model';
 
 /**
