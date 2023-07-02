@@ -9,6 +9,8 @@ import { State } from 'src/app/state/models/state.model';
 import { ClienteApiService } from 'src/app/client/client-api.service';
 import { Client } from 'src/app/client/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Place } from 'src/app/place/models/place.model';
+import { PlaceApiService } from 'src/app/place/service/place-api.service';
 
 
 enum MESSAGES {
@@ -27,13 +29,14 @@ enum MESSAGES {
   selector: 'app-mutate-dialog-reservation',
   templateUrl: './mutate-reservation-dialog.component.html',
   styleUrls: ['./mutate-reservation-dialog.component.sass'],
-  providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService]
+  providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService, PlaceApiService]
 })
 
 export class MutateDialogComponentReservation implements OnInit, OnDestroy {
   reservationForm!: FormGroup;
   state$: Observable<State[]> = of([]);
   clients$: Observable<Client[]> = of([]);
+  places$: Observable<Place[]> =of([]);
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -43,6 +46,7 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<MutateDialogComponentReservation>,
     private stateApiService: StateApiService,
     private clientService: ClienteApiService,
+    private placeService: PlaceApiService,
     private _snackBar: MatSnackBar,
   ){}
 
@@ -64,6 +68,7 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
 
     this.state$ = this.stateApiService.getState();
     this.clients$ = this.clientService.getClientes();
+    this.places$ = this.placeService.getPlaces();
   }
 
   confirm() {

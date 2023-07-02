@@ -1,4 +1,5 @@
 import { Client, ClientDto, emptyCliente } from "../client/client.model";
+import { Place, PlaceDto, emptyPlace } from "../place/models/place.model";
 import { StateDto, State, emptyState } from "../state/models/state.model";
 
 /**
@@ -13,6 +14,7 @@ export interface ReservationDto {
     reason: string;
     client?: ClientDto;
     state?: StateDto;
+    place?: PlaceDto,
 }
 
 
@@ -27,6 +29,7 @@ export interface Reservation {
     fecha: string;
     cliente: Client;
     estado: State;
+    espacio: Place;
 }
 
 /**
@@ -40,4 +43,5 @@ export const emptyReservation: Reservation = {
     fecha: '',
     cliente: emptyCliente,
     estado: emptyState,
+    espacio: emptyPlace,
 }
