@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { ResourceDto, Resource } from '../models/resource.model';
-import { ApiService } from '../../api.service';
+import { Resource, ResourceDto } from './resource.model';
+import { ApiService } from '../api.service';
 
 @Injectable()
 export class ResourceApiService {
@@ -13,7 +13,6 @@ export class ResourceApiService {
                 id: resource.id,
                 nombre: resource.name,
                 descripcion: resource.description,
-                lugar: resource.places,
             } as Resource)
         )
     }
@@ -21,4 +20,16 @@ export class ResourceApiService {
     getResources(): Observable<Resource[]> {
         return this.apiService.getResources().pipe(map(this.adaptResources));
     };
+
+    addResources(resource: ResourceDto): Observable<any>{
+        return this.apiService.addResoruces(resource);
+    };
+
+    editResources(id: number, resource: ResourceDto){
+        return this.apiService.editResources(id, resource);
+    }
+
+    destroyResources(id: number){
+        return this.apiService.destroyResources(id);
+    }
 }

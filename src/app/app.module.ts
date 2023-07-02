@@ -20,8 +20,7 @@ import { ClienteTableAdapterComponent } from './client//components/client-table-
 import { ClienteContainerComponent } from './client/components/client-table-container.component';
 import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
 import { PlaceContainerComponent } from './place/components/place-container.component';
-import { ResourceTableAdapterComponent } from './resources/adapters/resource-table-adapter.component';
-import { ResourceContainerComponent } from './resources/components/resource-container.component';
+import { ResourceContainerComponent } from './resources/components/resource-table-container.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -36,6 +35,9 @@ import { TypeofPipe } from './common/pipes/typeofPipe';
 import { MutateDialogComponentReservation } from './reservation/components/mutate-reservation-dialog/mutate-reservation-dialog.component';
 import { MutateDialogComponentClient } from './client/components/mutate-client-dialog/mutate-client-dialog.component';
 import { DestroyDialogComponentClient } from './client/components/destroy-client-dialog/destroy-client-dialog.component';
+import { ResourceTableAdapterComponent } from './resources/components/resource-table-adapter.component';
+import { MutateDialogComponentResource } from './resources/components/mutate-resource-dialog/mutate-resource-dialog.component';
+import { DestroyDialogComponentResource } from './resources/components/destroy-resource-dialog/destroy-resource-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { DestroyDialogComponentClient } from './client/components/destroy-client
     TypeofPipe,
     MutateDialogComponentClient,
     DestroyDialogComponentClient,
+    MutateDialogComponentResource,
+    DestroyDialogComponentResource,
   ],
   imports: [
     BrowserModule,
