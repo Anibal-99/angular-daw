@@ -5,6 +5,7 @@ import { Reservation } from './reservation.model';
 import { ApiService } from '../api.service';
 import { Client } from '../client/client.model';
 import { State } from '../state/models/state.model';
+import { Place } from '../place/models/place.model';
 
 /**
  * Injectable service for communicatig with reservation+
@@ -24,6 +25,7 @@ export class ReservationApiService {
                 fecha: r.date,
                 cliente: {id: r.client?.id, nombre: r.client?.name} as Client,
                 estado: {id: r.state?.id, nombre: r.state?.name} as State,
+                espacio: {id: r.place?.id, nombre: r.place?.name} as Place,
             } as Reservation)
         )
     }

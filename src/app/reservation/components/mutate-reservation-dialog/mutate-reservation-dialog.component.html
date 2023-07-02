@@ -40,6 +40,17 @@
             <mat-option *ngFor="let client of clients$ | async" [value]="client.id">{{client.nombre}}</mat-option>
         </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Espacio</mat-label>
+
+        <mat-select formControlName="place" placeholder="Espacio" matNativeControl>
+            <mat-option
+                *ngFor="let place of places$ | async"
+                [value]="place.id">
+                {{place.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 
 <div mat-dialog-actions align="center" class="actions">
