@@ -38,6 +38,8 @@ import { DestroyDialogComponentClient } from './client/components/destroy-client
 import { ResourceTableAdapterComponent } from './resources/components/resource-table-adapter.component';
 import { MutateDialogComponentResource } from './resources/components/mutate-resource-dialog/mutate-resource-dialog.component';
 import { DestroyDialogComponentResource } from './resources/components/destroy-resource-dialog/destroy-resource-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { DestroyDialogComponentResource } from './resources/components/destroy-r
     ReactiveFormsModule,
     FormsModule,
     MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

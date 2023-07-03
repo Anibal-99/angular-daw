@@ -1,14 +1,18 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TypeofPipe } from '../pipes/typeofPipe';
 import { ComponentType } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ReservationApiService } from 'src/app/reservation/reservation.service';
 
 @Component({
   selector: 'app-base-table',
   templateUrl: './base-table.component.html',
   styleUrls: ['./base-table.component.sass'],
-  providers: [TypeofPipe],
+  providers: [TypeofPipe, ReservationApiService],
 })
 export class BaseTableComponent implements OnDestroy {
   @Input() displayedColumns: string[] = [];
@@ -19,11 +23,32 @@ export class BaseTableComponent implements OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private dialog: MatDialog){};
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private dialog: MatDialog, private reservationApiService: ReservationApiService){};
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
   };
+  
+  ngOnInit(){
+    this.getReservationByTitle();
+  }
+
+  getReservationByTitle(){
+    this.reservationApiService.getReservations()
+    .subscribe({
+      next:(res)=>{
+        this.dataSource = new MatTableDataSource(res)
+        this.dataSource.paginator = this.paginator
+        this.dataSource.sort = this.sort
+      },
+      error:(res)=>{
+        alert("Error al filtrar")
+      }
+    })
+  }
 
   onEdit(element: any){
     this.subscriptions.push(
@@ -49,5 +74,14 @@ export class BaseTableComponent implements OnDestroy {
     )
   };
 
-}
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if(this.dataSource.paginator){
+      this.dataSource.paginator.firstPage();
+    }
+
+  }
+}
