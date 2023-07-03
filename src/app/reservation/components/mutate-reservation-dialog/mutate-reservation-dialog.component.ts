@@ -9,8 +9,8 @@ import { State } from 'src/app/state/models/state.model';
 import { ClienteApiService } from 'src/app/client/client-api.service';
 import { Client } from 'src/app/client/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Place } from 'src/app/place/models/place.model';
-import { PlaceApiService } from 'src/app/place/service/place-api.service';
+import { Place } from 'src/app/place/place.model';
+import { PlaceApiService } from 'src/app/place/place-api.service';
 
 
 enum MESSAGES {
@@ -64,6 +64,7 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
       ammount: [this.existingReservation?.monto ?? "", Validators.required],
       state: [this.existingReservation?.estado.id ?? "", Validators.required],
       client: [this.existingReservation?.cliente.id ?? "", Validators.required],
+      place: [this.existingReservation?.espacio.id ?? "", Validators.required],
     })
 
     this.state$ = this.stateApiService.getState();
@@ -81,6 +82,7 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
       date: this.reservationForm.value.date.toISOString().split('T')[0],
       state: {id: this.reservationForm.value.state},
       client: {id: this.reservationForm.value.client},
+      place:{id: this.reservationForm.value.place},
     }
 
     if (this.existingReservation) {
@@ -98,6 +100,7 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
           })
       )
     } else {
+      console.log(this.reservationForm.value)
       this.subscriptions.push(
         this.reservationApiService.addReservation(dtoReservation).subscribe({
           next: (res) => {

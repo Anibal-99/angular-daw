@@ -5,7 +5,7 @@ import { Reservation } from './reservation.model';
 import { ApiService } from '../api.service';
 import { Client } from '../client/client.model';
 import { State } from '../state/models/state.model';
-import { Place } from '../place/models/place.model';
+import { Place } from '../place/place.model';
 
 /**
  * Injectable service for communicatig with reservation+
