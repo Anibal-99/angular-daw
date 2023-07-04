@@ -1,0 +1,45 @@
+<div class="example-header">
+  <mat-form-field class="mat-form-field">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="warn" (click)="onAdd()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </th>
+    <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="onEdit(element)">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDestroy(element)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </td>
+    <th mat-header-cell>
+    </th>
+  </ng-container>
+
+  <ng-container *ngFor="let col of displayedColumns">
+    <ng-container [matColumnDef]="col">
+      <th mat-header-cell *matHeaderCellDef>{{col | titlecase}}</th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="(element[col] | typeof) == 'object';else plainRepr">
+            {{element[col]?.nombre}}
+          </ng-container>
+          <ng-template #plainRepr>
+            {{element[col]}}
+          </ng-template>
+        </td>
+    </ng-container>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
