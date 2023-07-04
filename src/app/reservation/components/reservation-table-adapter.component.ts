@@ -10,22 +10,15 @@ import { Observable, of } from 'rxjs';
     selector: 'app-reservation-table-adapter',
     template: `
         <app-base-table
-            [dataSource]="reservas$ | async"
+            [dataSource$]="reservas$"
             [displayedColumns]="displayedColumns"
             [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
-            (refresh)="emitRefresh($event)"
         ></app-base-table>`,
 })
 export class ReservationTableAdapterComponent {
     @Input() reservas$: Observable<Reservation[]> = of([]);
     @Input() mutateDialog: any;
     @Input() destroyDialog: any;
-    @Output() refresh: EventEmitter<boolean> = new EventEmitter();
-
-    emitRefresh(event: boolean) {
-        this.refresh.emit(event);
-    }
-
     displayedColumns: string[] = Object.keys(emptyReservation);
 }

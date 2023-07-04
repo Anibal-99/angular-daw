@@ -6,12 +6,11 @@ import { ResourceApiService } from '../resource-api.service';
 @Component({
   selector: 'app-resource-table-adapter',
   template: `
-      <app-base-table 
-          [dataSource]="resources$ | async" 
+      <app-base-table
+          [dataSource$]="resources$"
           [displayedColumns]="displayedColumns"
           [mutateDialog]="mutateDialog"
           [destroyDialog]="destroyDialog"
-          (refresh)="emitRefresh($event)"
       ></app-base-table>`,
 })
 export class ResourceTableAdapterComponent  {
@@ -19,11 +18,5 @@ export class ResourceTableAdapterComponent  {
     @Input() mutateDialog: any;
     @Input() destroyDialog: any;
     @Output() refresh: EventEmitter<boolean> = new EventEmitter();
-
-    emitRefresh(event: boolean) {
-        this.refresh.emit(event);
-    }
-
     displayedColumns: string[] = Object.keys(emptyResource);
-    constructor(){}
 }

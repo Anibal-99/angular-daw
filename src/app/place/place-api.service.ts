@@ -21,12 +21,10 @@ export class PlaceApiService {
     };
 
     addPlace(place: PlaceDto[]): Observable<any>{
-        console.log(place)
         return this.apiService.addPlace(place);
     };
 
     editPlace(id: number, place: PlaceDto[]){
-        // console.log(JSON.stringify(place))
         return this.apiService.editPlace(id, place);
     }
 
