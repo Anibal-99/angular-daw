@@ -23,11 +23,11 @@ import { PlaceContainerComponent } from './place/components/place-container.comp
 import { ResourceContainerComponent } from './resources/components/resource-table-container.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -40,6 +40,35 @@ import { MutateDialogComponentResource } from './resources/components/mutate-res
 import { DestroyDialogComponentResource } from './resources/components/destroy-resource-dialog/destroy-resource-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { Routes, RouterModule } from '@angular/router';
+
+// routes
+
+const routes: Routes = [
+  {
+    path:'reservas',
+    component: ReservationContainerComponent,
+
+  },
+  {
+    path:'clientes',
+    component: ClienteContainerComponent,
+  },
+  {
+    path: 'espacios',
+    component: PlaceContainerComponent,
+  },
+  {
+    path:'recursos',
+    component: ResourceContainerComponent,
+  },
+  {
+    path:'',
+    redirectTo:'/reservas',
+    pathMatch:'full'
+  }
+
+];
 
 @NgModule({
   declarations: [
@@ -86,6 +115,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],
