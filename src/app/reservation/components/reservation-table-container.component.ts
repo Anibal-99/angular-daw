@@ -16,22 +16,13 @@ import { MutateDialogComponentReservation } from './mutate-reservation-dialog/mu
             [reservas$]="reservas$"
             [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
-            (refresh)="getData()"
         ></app-reservation-table-adapter>`,
     providers: [ReservationApiService]
 })
 
-export class ReservationContainerComponent implements OnInit {
+export class ReservationContainerComponent  {
     constructor(private reservationApiService: ReservationApiService) {}
-    reservas$: Observable<Reservation[]> = of([]);
+    reservas$ = this.reservationApiService.getReservations();
     mutateDialog = MutateDialogComponentReservation;
     destroyDialog = DestroyDialogComponentReservation;
-
-    ngOnInit(): void {
-        this.getData();
-    }
-
-    getData(): void {
-        this.reservas$ = this.reservationApiService.getReservations();
-    }
 }

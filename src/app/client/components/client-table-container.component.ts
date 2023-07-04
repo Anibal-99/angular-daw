@@ -12,22 +12,13 @@ import { DestroyDialogComponentClient } from './destroy-client-dialog/destroy-cl
             [clientes$]="clientes$"
             [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
-            (refresh)="getData()"
         ></app-client-table-adapter>`,
     providers: [ClienteApiService]
 })
 
-export class ClienteContainerComponent implements OnInit {
+export class ClienteContainerComponent {
     constructor(private clientApiService: ClienteApiService) {}
-    clientes$: Observable<Client[]> = of([]);
+    clientes$: Observable<Client[]> = this.clientApiService.getClientes();
     mutateDialog = MutateDialogComponentClient;
     destroyDialog = DestroyDialogComponentClient;
-
-    ngOnInit(): void {
-        this.getData();
-    }
-
-    getData(): void {
-        this.clientes$ = this.clientApiService.getClientes();
-    }
 }

@@ -13,22 +13,13 @@ import { DestroyDialogComponentPlace } from './destroy-place-dialog/destroy-plac
             [places$]="places$"
             [mutateDialog]="mutateDialog"
             [destroyDialog]="destroyDialog"
-            (refresh)="getData()"
         ></app-place-table-adapter>`,
     providers: [PlaceApiService]
 })
 
-export class PlaceContainerComponent implements OnInit {
+export class PlaceContainerComponent {
     constructor(private placeApiService: PlaceApiService) {}
-    places$: Observable<Place[]> = of([]);
+    places$: Observable<Place[]> = this.placeApiService.getPlaces();
     mutateDialog = MutateDialogComponentPlace;
     destroyDialog = DestroyDialogComponentPlace;
-
-    ngOnInit(): void {
-        this.getData();
-    }
-
-    getData(): void {
-        this.places$ = this.placeApiService.getPlaces();
-    }
 }

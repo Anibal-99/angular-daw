@@ -73,9 +73,6 @@ export class MutateDialogComponentPlace implements OnInit, OnDestroy {
     //   resources: [{id: this.placeForm.value.resources, name:this.placeForm.value.resources.nombre}],
     // }
 
-    console.log(this.placeForm.value.resources)
-    console.log(JSON.stringify(dtoPlace))
-
     if (this.existingPlace) {
       this.subscriptions.push(
         this.placeApiService.editPlace(this.existingPlace.id, dtoPlace).subscribe({

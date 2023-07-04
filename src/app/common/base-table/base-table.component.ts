@@ -2,86 +2,87 @@ import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@a
 import { MatDialog } from '@angular/material/dialog';
 import { TypeofPipe } from '../pipes/typeofPipe';
 import { ComponentType } from '@angular/cdk/portal';
-import { Subscription } from 'rxjs';
-import {MatPaginator} from '@angular/material/paginator';
+import { BehaviorSubject, Observable, Subscription, filter, map, of, switchMap, tap } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReservationApiService } from 'src/app/reservation/reservation.service';
 
 @Component({
-  selector: 'app-base-table',
-  templateUrl: './base-table.component.html',
-  styleUrls: ['./base-table.component.sass'],
-  providers: [TypeofPipe, ReservationApiService],
+    selector: 'app-base-table',
+    templateUrl: './base-table.component.html',
+    styleUrls: ['./base-table.component.sass'],
+    providers: [TypeofPipe, ReservationApiService],
 })
 export class BaseTableComponent implements OnDestroy {
-  @Input() displayedColumns: string[] = [];
-  @Input() dataSource: any = [];
-  @Input() mutateDialog!: ComponentType<unknown>;
-  @Input() destroyDialog!: ComponentType<unknown>;
-  @Output() refresh = new EventEmitter<boolean>();
+    @Input() displayedColumns: string[] = [];
+    @Input() dataSource$: Observable<any[]> = of([]);
+    @Input() mutateDialog!: ComponentType<unknown>;
+    @Input() destroyDialog!: ComponentType<unknown>;
+    @Output() refresh = new EventEmitter<boolean>();
+    modDataSource$ = new BehaviorSubject(new MatTableDataSource());
+    filter$ = new BehaviorSubject('');
 
-  subscriptions: Subscription[] = [];
+    subscriptions: Subscription[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private reservationApiService: ReservationApiService){};
+    constructor(private dialog: MatDialog, private reservationApiService: ReservationApiService) { };
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe())
-  };
-  
-  // ngOnInit(){
-  //   this.getReservationByTitle();
-  // }
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(s => s.unsubscribe())
+    };
 
-  getReservationByTitle(){
-    this.reservationApiService.getReservations()
-    .subscribe({
-      next:(res)=>{
-        this.dataSource = new MatTableDataSource(res)
-        this.dataSource.paginator = this.paginator
-        this.dataSource.sort = this.sort
-      },
-      error:(res)=>{
-        alert("Error al filtrar")
-      }
-    })
-  }
 
-  onEdit(element: any){
-    this.subscriptions.push(
-      this.dialog.open(this.mutateDialog, {
-        width:'30%', data: element
-      }).afterClosed().subscribe(() => this.refresh.emit(true))
-    )
-  };
-
-  onAdd() {
-    this.subscriptions.push(
-      this.dialog.open(this.mutateDialog, {
-        width:'30%',
-      }).afterClosed().subscribe(() => this.refresh.emit(true))
-    )
-  };
-
-  onDestroy(element: any) {
-    this.subscriptions.push(
-      this.dialog.open(this.destroyDialog, {
-        data: element.id
-      }).afterClosed().subscribe(() => this.refresh.emit(true))
-    )
-  };
-
-  applyFilter(event: Event){
-    const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue)
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if(this.dataSource.paginator){
-      this.dataSource.paginator.firstPage();
+    ngOnInit() {
+        this.subscriptions.push(
+            this.dataSource$.subscribe(
+                data => {
+                    const matDataSource = new MatTableDataSource(data);
+                    matDataSource.paginator = this.paginator;
+                    matDataSource.sort = this.sort;
+                    this.modDataSource$.next(matDataSource)
+                }
+            ),
+            this.filter$.subscribe(
+                filter => {
+                    const newMDSource = this.modDataSource$.value;
+                    newMDSource.filter = filter;
+                    this.modDataSource$.next(
+                        newMDSource
+                    )
+                }
+            )
+        )
     }
 
-  }
+    onEdit(element: any) {
+        this.subscriptions.push(
+            this.dialog.open(this.mutateDialog, {
+                width: '30%', data: element
+            }).afterClosed().subscribe(() => this.ngOnInit())
+        )
+    };
+
+    onAdd() {
+        this.subscriptions.push(
+            this.dialog.open(this.mutateDialog, {
+                width: '30%',
+            }).afterClosed().subscribe(() => this.ngOnInit())
+        )
+    };
+
+    onDestroy(element: any) {
+        this.subscriptions.push(
+            this.dialog.open(this.destroyDialog, {
+                data: element.id
+            }).afterClosed().subscribe(() => this.ngOnInit())
+        )
+    };
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.filter$.next(filterValue.trim().toLowerCase());
+    }
 }

@@ -4,8 +4,8 @@
   </mat-form-field>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
+<table mat-table [dataSource]="(modDataSource$ | async)!" class="mat-elevation-z8">
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
       <button mat-icon-button color="warn" (click)="onAdd()">
@@ -31,7 +31,7 @@
           <ng-container *ngIf="(element[col] | typeof) == 'object';else plainRepr">
             {{element[col]?.nombre}}
           </ng-container>
-          
+
           <ng-template #plainRepr>
             {{element[col]}}
           </ng-template>
