@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { ReservationApiService } from '../../reservation.service';
@@ -11,6 +11,10 @@ import { Client } from 'src/app/client/client.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Place } from 'src/app/place/models/place.model';
 import { PlaceApiService } from 'src/app/place/service/place-api.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
 
 
 enum MESSAGES {
@@ -29,15 +33,19 @@ enum MESSAGES {
   selector: 'app-mutate-dialog-reservation',
   templateUrl: './mutate-reservation-dialog.component.html',
   styleUrls: ['./mutate-reservation-dialog.component.sass'],
-  providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService, PlaceApiService]
+  providers: [ReservationApiService, DatePipe, StateApiService, ClienteApiService, PlaceApiService],
 })
 
 export class MutateDialogComponentReservation implements OnInit, OnDestroy {
+  dataSource!: MatTableDataSource<any>;
   reservationForm!: FormGroup;
   state$: Observable<State[]> = of([]);
   clients$: Observable<Client[]> = of([]);
   places$: Observable<Place[]> =of([]);
   subscriptions: Subscription[] = [];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public existingReservation : any,
@@ -49,12 +57,10 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
     private placeService: PlaceApiService,
     private _snackBar: MatSnackBar,
   ){}
-
-
+  
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
@@ -64,52 +70,57 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
       ammount: [this.existingReservation?.monto ?? "", Validators.required],
       state: [this.existingReservation?.estado.id ?? "", Validators.required],
       client: [this.existingReservation?.cliente.id ?? "", Validators.required],
+      place: [this.existingReservation?.espacio.id ?? "", Validators.required],
     })
-
+    
     this.state$ = this.stateApiService.getState();
     this.clients$ = this.clientService.getClientes();
     this.places$ = this.placeService.getPlaces();
+   
   }
-
+  
   confirm() {
     if (!this.reservationForm.valid) {
       return;
     }
-
+    
     const dtoReservation = {
       ...this.reservationForm.value,
       date: this.reservationForm.value.date.toISOString().split('T')[0],
       state: {id: this.reservationForm.value.state},
       client: {id: this.reservationForm.value.client},
+      place: {id: this.reservationForm.value.place},
     }
-
+    
     if (this.existingReservation) {
       this.subscriptions.push(
         this.reservationApiService.editReservation(this.existingReservation.id, dtoReservation)
-          .subscribe({
-            next: (res) => {
-              this._snackBar.open(MESSAGES.EDIT_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
-              this.dialogRef.close();
-            },
-            error: (res) => {
-              this._snackBar.open(MESSAGES.EDIT_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
-              this.dialogRef.close();
-            }
-          })
-      )
-    } else {
-      this.subscriptions.push(
-        this.reservationApiService.addReservation(dtoReservation).subscribe({
+        .subscribe({
           next: (res) => {
-            this._snackBar.open(MESSAGES.ADD_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+            this._snackBar.open(MESSAGES.EDIT_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
             this.dialogRef.close();
           },
           error: (res) => {
-            this._snackBar.open(MESSAGES.ADD_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+            this._snackBar.open(MESSAGES.EDIT_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
             this.dialogRef.close();
           }
         })
-      )
-    }
-  }
+        )
+      } else {
+        this.subscriptions.push(
+          this.reservationApiService.addReservation(dtoReservation).subscribe({
+            next: (res) => {
+              this._snackBar.open(MESSAGES.ADD_SUCCESS_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            },
+            error: (res) => {
+              this._snackBar.open(MESSAGES.ADD_FAILURE_MESSAGE, MESSAGES.DISSMISS_MESSAGE);
+              this.dialogRef.close();
+            }
+          })
+          )
+        }
+      }
+
+
 }

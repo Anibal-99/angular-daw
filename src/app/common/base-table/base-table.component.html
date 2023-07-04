@@ -1,5 +1,11 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="example-header">
+  <mat-form-field class="mat-form-field">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+  </mat-form-field>
+</div>
 
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
       <button mat-icon-button color="warn" (click)="onAdd()">
@@ -35,3 +41,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
