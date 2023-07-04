@@ -31,6 +31,7 @@
           <ng-container *ngIf="(element[col] | typeof) == 'object';else plainRepr">
             {{element[col]?.nombre}}
           </ng-container>
+          
           <ng-template #plainRepr>
             {{element[col]}}
           </ng-template>

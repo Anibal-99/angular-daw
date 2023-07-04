@@ -18,11 +18,16 @@ import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
 import { ClienteTableAdapterComponent } from './client//components/client-table-adapter.component';
 import { ClienteContainerComponent } from './client/components/client-table-container.component';
-import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
-import { PlaceContainerComponent } from './place/components/place-container.component';
+import { PlaceTableAdapterComponent } from './place/components/place-table-adapter.component';
+import { PlaceContainerComponent } from './place/components/place-table-container.component';
 import { ResourceContainerComponent } from './resources/components/resource-table-container.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -92,6 +97,8 @@ const routes: Routes = [
     DestroyDialogComponentClient,
     MutateDialogComponentResource,
     DestroyDialogComponentResource,
+    MutateDialogComponentPlace,
+    DestroyDialogComponentPlace,
   ],
   imports: [
     BrowserModule,
