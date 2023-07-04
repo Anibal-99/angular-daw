@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ReservationApiService } from '../../reservation.service';
 import { DatePipe } from '@angular/common';
 import { StateApiService } from 'src/app/state/services/state-api.service';
-import { Observable, Subscription, filter, map, of, tap } from 'rxjs';
+import { Observable, Subscription, filter, map, of, switchMap, tap } from 'rxjs';
 import { State } from 'src/app/state/models/state.model';
 import { ClienteApiService } from 'src/app/client/client-api.service';
 import { Client } from 'src/app/client/client.model';
@@ -14,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Place } from 'src/app/place/place.model';
 import { PlaceApiService } from 'src/app/place/place-api.service';
+import { Reservation } from '../../reservation.model';
 
 enum MESSAGES {
   ADD_SUCCESS_MESSAGE = 'Reserva registrada con éxito.',
@@ -21,6 +22,7 @@ enum MESSAGES {
   EDIT_SUCCESS_MESSAGE = 'Reserva modificada con éxito.',
   EDIT_FAILURE_MESSAGE = 'Hubo un error al registrar la reserva.',
   DISSMISS_MESSAGE = 'Ocultar',
+  VALIDATED_DATE = 'Ya existe una reserva para la fecha ingresada',
 }
 
 /**
@@ -83,10 +85,18 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
     this.places$ = this.placeService.getPlaces();
   }
 
+  validateDate(date: any): Observable<boolean> {
+    return this.reservationApiService.getReservations().pipe(
+      map(reservas => !reservas.some(r => r.fecha === date)),
+    )
+  }
+
+
   confirm() {
     if (!this.reservationForm.valid) {
       return;
     }
+
 
     const dtoReservation = {
       ...this.reservationForm.value,
@@ -118,8 +128,17 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
           })
       );
     } else {
+      // this.validateDate(dtoReservation.date)
       this.subscriptions.push(
-        this.reservationApiService.addReservation(dtoReservation).subscribe({
+      this.validateDate(dtoReservation.date).pipe(
+        tap(v => {
+          if(!v) {
+            this._snackBar.open(MESSAGES.VALIDATED_DATE)
+          }
+        }),
+        filter(v => v),
+        switchMap(() => this.reservationApiService.addReservation(dtoReservation))
+      ).subscribe({
           next: (res) => {
             this._snackBar.open(
               MESSAGES.ADD_SUCCESS_MESSAGE,
@@ -135,7 +154,6 @@ export class MutateDialogComponentReservation implements OnInit, OnDestroy {
             this.dialogRef.close();
           },
         })
-      );
+      )
     }
-  }
-}
+}}
