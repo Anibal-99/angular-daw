@@ -28,11 +28,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -46,6 +41,8 @@ import { DestroyDialogComponentResource } from './resources/components/destroy-r
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { Routes, RouterModule } from '@angular/router';
+import { MutateDialogComponentPlace } from './place/components/mutate-place-dialog/mutate-place-dialog.component';
+import { DestroyDialogComponentPlace } from './place/components/destroy-place-dialog/destroy-place-dialog.component';
 
 // routes
 
