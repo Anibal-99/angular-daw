@@ -1,5 +1,5 @@
 import { Client, ClientDto, emptyCliente } from "../client/client.model";
-import { Place, PlaceDto, emptyPlace } from "../place/models/place.model";
+import { Place, PlaceDto, emptyPlace } from "../place/place.model";
 import { StateDto, State, emptyState } from "../state/models/state.model";
 
 /**

@@ -18,16 +18,16 @@ import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
 import { ClienteTableAdapterComponent } from './client//components/client-table-adapter.component';
 import { ClienteContainerComponent } from './client/components/client-table-container.component';
-import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
-import { PlaceContainerComponent } from './place/components/place-container.component';
+import { PlaceTableAdapterComponent } from './place/components/place-table-adapter.component';
+import { PlaceContainerComponent } from './place/components/place-table-container.component';
 import { ResourceContainerComponent } from './resources/components/resource-table-container.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -40,6 +40,8 @@ import { MutateDialogComponentResource } from './resources/components/mutate-res
 import { DestroyDialogComponentResource } from './resources/components/destroy-resource-dialog/destroy-resource-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MutateDialogComponentPlace } from './place/components/mutate-place-dialog/mutate-place-dialog.component';
+import { DestroyDialogComponentPlace } from './place/components/destroy-place-dialog/destroy-place-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { MatSortModule } from '@angular/material/sort';
     DestroyDialogComponentClient,
     MutateDialogComponentResource,
     DestroyDialogComponentResource,
+    MutateDialogComponentPlace,
+    DestroyDialogComponentPlace,
   ],
   imports: [
     BrowserModule,

@@ -32,9 +32,9 @@ export class BaseTableComponent implements OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe())
   };
   
-  ngOnInit(){
-    this.getReservationByTitle();
-  }
+  // ngOnInit(){
+  //   this.getReservationByTitle();
+  // }
 
   getReservationByTitle(){
     this.reservationApiService.getReservations()

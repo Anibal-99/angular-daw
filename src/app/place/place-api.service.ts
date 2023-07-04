@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { PlaceDto, Place } from '../models/place.model';
-import { ApiService } from '../../api.service';
+import { PlaceDto, Place } from './place.model';
+import { ApiService } from '../api.service';
 
 @Injectable()
 export class PlaceApiService {
@@ -19,4 +19,19 @@ export class PlaceApiService {
     getPlaces(): Observable<Place[]> {
         return this.apiService.getPlaces().pipe(map(this.adaptPlaces));
     };
+
+    addPlace(place: PlaceDto[]): Observable<any>{
+        console.log(place)
+        return this.apiService.addPlace(place);
+    };
+
+    editPlace(id: number, place: PlaceDto[]){
+        // console.log(JSON.stringify(place))
+        return this.apiService.editPlace(id, place);
+    }
+
+    destroyPlace(id: number){
+        return this.apiService.destroyPlace(id);
+    }
+
 }
