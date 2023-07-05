@@ -3,17 +3,17 @@ import { Resource, ResourceDto, emptyResource } from "../resources/resource.mode
 export interface PlaceDto {
     id: number;
     name: string;
-    resource: ResourceDto;
+    resources: Array<ResourceDto>;
 }
 
 export interface Place {
     id: number;
     nombre: string;
-    recurso: Resource;
+    recursos: Array<Resource>;
 }
 
 export const emptyPlace: Place = {
     id: 0,
     nombre: '',
-    recurso: emptyResource,
+    recursos: [],
 }
