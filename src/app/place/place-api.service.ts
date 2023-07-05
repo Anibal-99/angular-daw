@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { PlaceDto, Place } from './place.model';
 import { ApiService } from '../api.service';
+import { Resource } from '../resources/resource.model'
 
 @Injectable()
 export class PlaceApiService {
@@ -12,6 +13,13 @@ export class PlaceApiService {
             place => ({
                 id: place.id,
                 nombre: place.name,
+                recursos: place.resources.map(r => (
+                    {
+                        id: r.id,
+                        nombre: r.name,
+                        descripcion: r.description
+                    }) as Resource
+                ),
             } as Place)
         )
     }

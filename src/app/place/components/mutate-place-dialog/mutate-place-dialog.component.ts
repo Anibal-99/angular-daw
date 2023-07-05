@@ -53,7 +53,7 @@ export class MutateDialogComponentPlace implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.placeForm = this.formBuilder.group({
       name: [this.existingPlace?.nombre ?? "", Validators.required],
-      resources: [this.existingPlace?.recurso ?? "", Validators.required],
+      resources: [this.existingPlace?.recursos.map((r: any) => r.id) ?? "", Validators.required],
     })
     this.resources$ = this.resourceApiService.getResources();
   }
@@ -67,11 +67,6 @@ export class MutateDialogComponentPlace implements OnInit, OnDestroy {
       ...this.placeForm.value,
       resources: this.placeForm.value.resources.map((id: string)=> ({ id })),
     }
-
-    // const dtoPlace = {
-    //   ...this.placeForm.value,
-    //   resources: [{id: this.placeForm.value.resources, name:this.placeForm.value.resources.nombre}],
-    // }
 
     if (this.existingPlace) {
       this.subscriptions.push(
@@ -100,14 +95,5 @@ export class MutateDialogComponentPlace implements OnInit, OnDestroy {
         })
       )
     }
-  }
-
-  toggleAllSelection() {
-    // if (this.allSelected.selected) {
-    //   this.placeForm.controls.resource
-    //     .patchValue([...this.resources$.forEach(), 0]);
-    // } else {
-    //   this.placeForm.controls.resource.patchValue([]);
-    // }
   }
 }
