@@ -46,7 +46,7 @@ export class MutateDialogComponentResource implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.resourceForm = this.formBuilder.group({
       name: [this.existingResource?.nombre ?? "", Validators.required],
-      description: [this.existingResource?.descripcion ?? "", Validators.required],
+      description: [this.existingResource?.descripcion ?? ""],
     })
   }
 
