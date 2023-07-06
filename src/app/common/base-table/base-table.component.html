@@ -28,13 +28,7 @@
     <ng-container [matColumnDef]="col">
       <th mat-header-cell *matHeaderCellDef>{{col | titlecase}}</th>
         <td mat-cell *matCellDef="let element">
-          <ng-container *ngIf="(element[col] | typeof) == 'object';else plainRepr">
-            {{element[col]?.nombre}}
-          </ng-container>
-
-          <ng-template #plainRepr>
-            {{element[col]}}
-          </ng-template>
+            {{element[col] | repr}}
         </td>
     </ng-container>
   </ng-container>

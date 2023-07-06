@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TypeofPipe } from '../pipes/typeofPipe';
 import { ComponentType } from '@angular/cdk/portal';
 import { BehaviorSubject, Observable, Subscription, filter, map, of, switchMap, tap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,7 +11,7 @@ import { ReservationApiService } from 'src/app/reservation/reservation.service';
     selector: 'app-base-table',
     templateUrl: './base-table.component.html',
     styleUrls: ['./base-table.component.sass'],
-    providers: [TypeofPipe, ReservationApiService],
+    providers: [ReservationApiService],
 })
 export class BaseTableComponent implements OnDestroy {
     @Input() displayedColumns: string[] = [];

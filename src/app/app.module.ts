@@ -31,7 +31,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TypeofPipe } from './common/pipes/typeofPipe';
 import { MutateDialogComponentReservation } from './reservation/components/mutate-reservation-dialog/mutate-reservation-dialog.component';
 import { MutateDialogComponentClient } from './client/components/mutate-client-dialog/mutate-client-dialog.component';
 import { DestroyDialogComponentClient } from './client/components/destroy-client-dialog/destroy-client-dialog.component';
@@ -43,6 +42,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { Routes, RouterModule } from '@angular/router';
 import { MutateDialogComponentPlace } from './place/components/mutate-place-dialog/mutate-place-dialog.component';
 import { DestroyDialogComponentPlace } from './place/components/destroy-place-dialog/destroy-place-dialog.component';
+import { ReprPipe } from './common/pipes/relatedObjectPipe';
 
 // routes
 
@@ -89,7 +89,7 @@ const routes: Routes = [
     FooterComponent,
     MutateDialogComponentReservation,
     DestroyDialogComponentReservation,
-    TypeofPipe,
+    ReprPipe,
     MutateDialogComponentClient,
     DestroyDialogComponentClient,
     MutateDialogComponentResource,
