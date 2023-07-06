@@ -1,17 +1,19 @@
+import { Resource, ResourceDto, emptyResource } from "../resources/resource.model";
+
 export interface PlaceDto {
     id: number;
     name: string;
-    resource?: any;
+    resources: Array<ResourceDto>;
 }
 
 export interface Place {
     id: number;
     nombre: string;
-    recurso?: any;
+    recursos: Array<Resource>;
 }
 
 export const emptyPlace: Place = {
     id: 0,
     nombre: '',
-    recurso: '',
+    recursos: [],
 }

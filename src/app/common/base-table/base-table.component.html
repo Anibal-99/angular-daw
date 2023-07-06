@@ -4,8 +4,8 @@
   </mat-form-field>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
+<table mat-table [dataSource]="(modDataSource$ | async)!" class="mat-elevation-z8">
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
       <button mat-icon-button color="warn" (click)="onAdd()">
@@ -28,12 +28,7 @@
     <ng-container [matColumnDef]="col">
       <th mat-header-cell *matHeaderCellDef>{{col | titlecase}}</th>
         <td mat-cell *matCellDef="let element">
-          <ng-container *ngIf="(element[col] | typeof) == 'object';else plainRepr">
-            {{element[col]?.nombre}}
-          </ng-container>
-          <ng-template #plainRepr>
-            {{element[col]}}
-          </ng-template>
+            {{element[col] | repr}}
         </td>
     </ng-container>
   </ng-container>
@@ -42,4 +37,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

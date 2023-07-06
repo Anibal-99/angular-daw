@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Agregar un nuevo espacio</h1>
+
+<div mat-dialog-content [formGroup]="placeForm" class="mdcontent">
+    <mat-form-field appearance="outline" class="mff-1">
+        <mat-label>Nombre del espacio</mat-label>
+        <input formControlName="name" matInput placeholder="Nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Espacio</mat-label>
+
+        <mat-select formControlName="resources" placeholder="Espacio" multiple>
+            <mat-option
+                *ngFor="let resource of resources$ | async"
+                [value]="resource.id">
+                {{resource.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center" class="actions">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="confirm()">Guardar</button>
+</div>

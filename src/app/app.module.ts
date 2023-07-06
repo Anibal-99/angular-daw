@@ -18,8 +18,8 @@ import { MainComponent } from './sections/main/main.component';
 import { FooterComponent } from './sections/footer/footer.component';
 import { ClienteTableAdapterComponent } from './client//components/client-table-adapter.component';
 import { ClienteContainerComponent } from './client/components/client-table-container.component';
-import { PlaceTableAdapterComponent } from './place/adapters/place-table-adapter.component';
-import { PlaceContainerComponent } from './place/components/place-container.component';
+import { PlaceTableAdapterComponent } from './place/components/place-table-adapter.component';
+import { PlaceContainerComponent } from './place/components/place-table-container.component';
 import { ResourceContainerComponent } from './resources/components/resource-table-container.component';
 import { DestroyDialogComponentReservation } from './reservation/components/destroy-reservation-dialog/destroy-reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -31,7 +31,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationContainerComponent } from './reservation/components/reservation-table-container.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TypeofPipe } from './common/pipes/typeofPipe';
 import { MutateDialogComponentReservation } from './reservation/components/mutate-reservation-dialog/mutate-reservation-dialog.component';
 import { MutateDialogComponentClient } from './client/components/mutate-client-dialog/mutate-client-dialog.component';
 import { DestroyDialogComponentClient } from './client/components/destroy-client-dialog/destroy-client-dialog.component';
@@ -41,6 +40,9 @@ import { DestroyDialogComponentResource } from './resources/components/destroy-r
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { Routes, RouterModule } from '@angular/router';
+import { MutateDialogComponentPlace } from './place/components/mutate-place-dialog/mutate-place-dialog.component';
+import { DestroyDialogComponentPlace } from './place/components/destroy-place-dialog/destroy-place-dialog.component';
+import { ReprPipe } from './common/pipes/relatedObjectPipe';
 
 // routes
 
@@ -87,11 +89,13 @@ const routes: Routes = [
     FooterComponent,
     MutateDialogComponentReservation,
     DestroyDialogComponentReservation,
-    TypeofPipe,
+    ReprPipe,
     MutateDialogComponentClient,
     DestroyDialogComponentClient,
     MutateDialogComponentResource,
     DestroyDialogComponentResource,
+    MutateDialogComponentPlace,
+    DestroyDialogComponentPlace,
   ],
   imports: [
     BrowserModule,
